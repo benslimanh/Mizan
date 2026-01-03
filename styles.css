@@ -1327,3 +1327,90 @@ button:focus {
     }
 }
 
+/* ===== PROFILE MODAL STYLES ===== */
+.profile-content {
+    padding: 2rem;
+}
+
+.profile-info-group {
+    margin-bottom: 1.5rem;
+}
+
+.profile-info-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.profile-info-value {
+    font-size: 0.95rem;
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-regular);
+    word-break: break-word;
+}
+
+.profile-info-uid {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    background-color: var(--color-light-grey);
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    margin-top: 0.25rem;
+}
+
+.profile-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-verified {
+    background-color: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.status-unverified {
+    background-color: #ef4444;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+.auth-button-secondary {
+    background-color: transparent;
+    color: var(--color-deep-teal);
+    border: 2px solid var(--color-deep-teal);
+}
+
+.auth-button-secondary:hover:not(:disabled) {
+    background-color: var(--color-deep-teal);
+    color: var(--color-white);
+}
+
+/* ===== SETTINGS MODAL STYLES ===== */
+.settings-section {
+    padding: 1rem 0;
+}
+
+.settings-section-title {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-dark-grey);
+    margin-bottom: 0.75rem;
+}
+
+.settings-section-description {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
