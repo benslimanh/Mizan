@@ -15,9 +15,14 @@ const HeroSection = () => {
   const centerY = 50
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-950">
-      {/* Background gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-950/90 via-blue-900/80 to-indigo-950/90"></div>
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#1c1917]">
+      {/* Background pattern overlay for depth */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+          backgroundSize: '40px 40px'
+        }}></div>
+      </div>
       
       {/* Subtle grid pattern */}
       <div className="absolute inset-0 opacity-10" style={{
@@ -34,7 +39,7 @@ const HeroSection = () => {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                 Go beyond traditional finance.
               </h1>
-              <p className="text-xl sm:text-2xl text-blue-100 leading-relaxed max-w-xl">
+              <p className="text-xl sm:text-2xl text-stone-300 leading-relaxed max-w-xl">
                 Discover AI-driven Islamic finance solutions woven into every process.
               </p>
             </div>
@@ -42,13 +47,13 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <a
                 href="solutions.html"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-950 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center px-8 py-4 bg-orange-600 text-white font-semibold rounded-xl hover:bg-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
                 Explore Solutions
               </a>
               <a
                 href="contact.html"
-                className="inline-flex items-center justify-center px-8 py-4 bg-transparent text-white font-semibold rounded-lg border-2 border-white/30 hover:border-white/60 hover:bg-white/10 transition-all duration-300"
+                className="inline-flex items-center justify-center px-8 py-4 bg-transparent text-white font-semibold rounded-xl border-2 border-white/30 hover:border-white/60 hover:bg-white/10 transition-all duration-300"
               >
                 Contact Us
               </a>
@@ -58,7 +63,7 @@ const HeroSection = () => {
           {/* Right Side - Network Visualization */}
           <div className="relative h-[500px] lg:h-[600px] order-1 lg:order-2">
             <div className="relative w-full h-full">
-              {/* SVG for connection lines */}
+              {/* SVG for connection lines - Subtle white/grey */}
               <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
                 {nodes.map((node, index) => (
                   <line
@@ -67,7 +72,7 @@ const HeroSection = () => {
                     y1={`${centerY}%`}
                     x2={`${node.x}%`}
                     y2={`${node.y}%`}
-                    stroke="rgba(255, 255, 255, 0.2)"
+                    stroke="rgba(255, 255, 255, 0.15)"
                     strokeWidth="1.5"
                     style={{
                       strokeDasharray: '4,4',
@@ -83,18 +88,18 @@ const HeroSection = () => {
                 style={{ animation: 'pulse-glow 3s ease-in-out infinite' }}
               >
                 <div className="relative">
-                  {/* Glow effect */}
-                  <div className="absolute inset-0 bg-blue-400 rounded-full blur-2xl opacity-50 animate-pulse-glow"></div>
+                  {/* Glow effect - Orange */}
+                  <div className="absolute inset-0 bg-orange-500 rounded-full blur-2xl opacity-50 animate-pulse-glow"></div>
                   
                   {/* Main icon container */}
                   <div className="relative bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-2xl">
-                    <div className="bg-gradient-to-br from-blue-400 to-indigo-500 rounded-xl p-4">
+                    <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-4">
                       <Sparkles className="w-12 h-12 text-white" strokeWidth={2} />
                     </div>
                   </div>
                   
-                  {/* Pulsing rings */}
-                  <div className="absolute inset-0 border-2 border-blue-400/30 rounded-2xl animate-ping" style={{ animationDuration: '3s' }}></div>
+                  {/* Pulsing rings - Orange */}
+                  <div className="absolute inset-0 border-2 border-orange-500/30 rounded-2xl animate-ping" style={{ animationDuration: '3s' }}></div>
                 </div>
               </div>
 
@@ -114,14 +119,14 @@ const HeroSection = () => {
                     }}
                   >
                     <div className="group relative">
-                      {/* Node glow */}
-                      <div className="absolute inset-0 bg-blue-400/20 rounded-xl blur-md group-hover:bg-blue-400/40 transition-all duration-300"></div>
+                      {/* Node glow - Orange */}
+                      <div className="absolute inset-0 bg-orange-500/20 rounded-xl blur-md group-hover:bg-orange-500/40 transition-all duration-300"></div>
                       
                       {/* Node card */}
-                      <div className="relative bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 hover:border-white/40 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[120px]">
+                      <div className="relative bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 hover:border-orange-500/40 transition-all duration-300 shadow-lg hover:shadow-orange-500/20 min-w-[120px]">
                         <div className="flex flex-col items-center space-y-2">
-                          <div className="bg-gradient-to-br from-blue-400/20 to-indigo-500/20 rounded-lg p-3 group-hover:from-blue-400/40 group-hover:to-indigo-500/40 transition-all duration-300">
-                            <IconComponent className="w-6 h-6 text-white" strokeWidth={2} />
+                          <div className="bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-lg p-3 group-hover:from-orange-500/40 group-hover:to-orange-600/40 transition-all duration-300">
+                            <IconComponent className="w-6 h-6 text-white group-hover:text-orange-400 transition-colors" strokeWidth={2} />
                           </div>
                           <span className="text-white text-sm font-medium">{node.label}</span>
                         </div>
