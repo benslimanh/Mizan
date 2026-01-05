@@ -33,6 +33,27 @@
         },
       };
     </script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script>
+      
+      
+const firebaseConfig = {
+  apiKey: "AIzaSyCBfjUajnfrFpZaaSfYx8JAyHLs2duFMw0",
+  authDomain: "mizan-auth.firebaseapp.com",
+  projectId: "mizan-auth",
+  storageBucket: "mizan-auth.firebasestorage.app",
+  messagingSenderId: "863003198174",
+  appId: "1:863003198174:web:b7215ce349318b1b03b84f",
+  measurementId: "G-R5L91BGKFC"
+};
+      
+if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
+        firebase.initializeApp(firebaseConfig);
+      }
+    </script>
   </head>
 
   <body class="h-full bg-white font-sans text-slate-500 antialiased">
@@ -41,45 +62,101 @@
       class="intro-overlay fixed inset-0 z-50 flex items-center justify-center bg-white"
       aria-hidden="true"
     >
-      <div class="flex flex-col items-center gap-4">
-        <div
-          class="intro-logo grid h-16 w-16 place-items-center rounded-2xl bg-brand-orange/10 shadow-sm ring-1 ring-brand-orange/15"
-        >
-          <svg
-            width="34"
-            height="34"
-            viewBox="0 0 34 34"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Mizan abstract logo"
+      <div class="flex flex-col items-center">
+        <img src="logo.ico" alt="Mizan Logo" class="intro-logo h-24 mb-6" />
+        <div class="intro-text text-xs font-semibold tracking-[0.35em] text-charcoal">
+          BLOCKCHAIN-POWERED · SHARIA-COMPLIANT
+        </div>
+      </div>
+    </div>
+
+    <div id="loginModal" class="fixed inset-0 z-50 hidden items-center justify-center px-4" aria-hidden="true">
+      <div class="absolute inset-0 bg-slate-900/30 backdrop-blur-sm"></div>
+      <div class="relative w-full max-w-md rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-soft backdrop-blur-md">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 rounded-2xl bg-slate-100 p-1 text-xs font-semibold">
+              <button
+                type="button"
+                id="authModeLogin"
+                class="rounded-xl bg-white px-3 py-2 text-charcoal shadow-sm ring-1 ring-slate-200/70"
+              >
+                Login
+              </button>
+              <button type="button" id="authModeSignup" class="rounded-xl px-3 py-2 text-slate-600 hover:text-charcoal">
+                Create Account
+              </button>
+            </div>
+            <div id="loginModalTitle" class="mt-4 text-sm font-semibold text-charcoal">Login</div>
+            <div id="loginModalSubtitle" class="mt-1 text-xs text-slate-500">
+              Blockchain-Powered, Sharia-Compliant (AAOIFI standards).
+            </div>
+          </div>
+          <button
+            type="button"
+            id="loginModalClose"
+            class="rounded-xl p-2 text-slate-500 hover:bg-white/60 hover:text-charcoal"
           >
-            <path
-              d="M9 22.5C12.5 26.8 21.5 26.8 25 22.5"
-              stroke="#f97316"
-              stroke-width="2.4"
-              stroke-linecap="round"
-            />
-            <path
-              d="M9 11.5C12.5 7.2 21.5 7.2 25 11.5"
-              stroke="#f97316"
-              stroke-width="2.4"
-              stroke-linecap="round"
-              opacity="0.7"
-            />
-            <path
-              d="M17 7.5V26.5"
-              stroke="#f97316"
-              stroke-width="2.4"
-              stroke-linecap="round"
-              opacity="0.9"
-            />
-          </svg>
+            <i data-lucide="x" class="h-5 w-5"></i>
+          </button>
         </div>
 
-        <div class="intro-text text-xs font-semibold tracking-[0.35em] text-charcoal">
-          MIZAN SOFTWARE
-        </div>
+        <form id="loginForm" class="mt-6 space-y-4">
+          <div>
+            <label class="text-sm font-semibold text-charcoal" for="loginEmail">Email</label>
+            <div class="mt-2">
+              <input
+                id="loginEmail"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                class="w-full rounded-xl border border-slate-200 bg-white/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
+                placeholder="you@company.com"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="text-sm font-semibold text-charcoal" for="loginPassword">Password</label>
+            <div class="mt-2">
+              <input
+                id="loginPassword"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                required
+                class="w-full rounded-xl border border-slate-200 bg-white/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
+                placeholder="••••••••"
+              />
+            </div>
+          </div>
+
+          <div id="confirmPasswordRow" class="hidden">
+            <label class="text-sm font-semibold text-charcoal" for="loginPasswordConfirm">Confirm Password</label>
+            <div class="mt-2">
+              <input
+                id="loginPasswordConfirm"
+                name="confirmPassword"
+                type="password"
+                autocomplete="new-password"
+                class="w-full rounded-xl border border-slate-200 bg-white/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
+                placeholder="••••••••"
+              />
+            </div>
+          </div>
+
+          <div id="loginMessage" class="text-sm font-semibold text-emerald-700" aria-live="polite"></div>
+          <div id="loginError" class="text-sm font-semibold text-red-600" aria-live="polite"></div>
+
+          <button
+            type="submit"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
+          >
+            <i data-lucide="log-in" class="h-4 w-4"></i>
+            <span id="loginSubmitText">Sign In</span>
+          </button>
+        </form>
       </div>
     </div>
 
@@ -89,11 +166,7 @@
           class="mx-auto flex w-full max-w-6xl items-center justify-between rounded-2xl border border-slate-200/70 bg-white/80 px-4 py-3 shadow-soft backdrop-blur-md"
         >
           <a href="./index.html" class="flex items-center gap-2">
-            <span
-              class="grid h-9 w-9 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15"
-            >
-              <i data-lucide="sparkles" class="h-5 w-5 text-brand-orange"></i>
-            </span>
+            <img src="logo.ico" alt="Mizan Logo" class="h-8" />
             <span class="text-sm font-semibold tracking-wide text-charcoal">Mizan Software</span>
           </a>
 
@@ -110,11 +183,56 @@
           </div>
 
           <div class="flex items-center gap-2">
+            <span id="authNotice" class="hidden text-xs font-semibold text-brand-orange md:inline-flex"></span>
+            <span id="authEmail" class="hidden text-xs font-semibold text-slate-500 md:inline-flex"></span>
             <a
-              href="./contact.html"
-              class="hidden rounded-xl px-4 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 md:inline-flex"
+              id="authButton"
+              href="#login"
+              class="inline-flex rounded-xl px-4 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100"
               >Sign In</a
             >
+            <div id="profileMenu" class="relative hidden">
+              <button
+                type="button"
+                id="profileButton"
+                class="grid h-10 w-10 place-items-center rounded-full bg-brand-orange text-sm font-bold text-white shadow-sm shadow-brand-orange/20"
+              ></button>
+              <div
+                id="profileDropdown"
+                class="absolute right-0 mt-3 hidden w-80 rounded-3xl border border-slate-200 bg-white/80 p-5 shadow-soft backdrop-blur-md"
+              >
+                <div class="text-xs font-semibold tracking-[0.22em] text-slate-400">PROFILE</div>
+                <div id="profileEmail" class="mt-3 text-sm font-semibold text-charcoal"></div>
+                <div id="profileSince" class="mt-1 text-xs font-semibold text-slate-500"></div>
+
+                <div class="mt-5 flex flex-col gap-2">
+                  <a
+                    id="profileDashboard"
+                    href="./platform.html"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-4 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
+                  >
+                    <i data-lucide="layout-dashboard" class="h-4 w-4"></i>
+                    Dashboard
+                  </a>
+                  <button
+                    type="button"
+                    id="resendVerification"
+                    class="hidden inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
+                  >
+                    <i data-lucide="mail" class="h-4 w-4 text-brand-orange"></i>
+                    Resend Verification
+                  </button>
+                  <button
+                    type="button"
+                    id="logoutButton"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
+                  >
+                    <i data-lucide="log-out" class="h-4 w-4 text-brand-orange"></i>
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </div>
             <a
               href="./contact.html"
               class="inline-flex items-center gap-2 rounded-xl bg-brand-orange px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
@@ -127,13 +245,15 @@
       </header>
 
       <main class="px-4">
-        <section class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 pb-16 pt-12 md:grid-cols-2 md:pt-16">
+        <section
+          class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 pb-16 pt-12 md:grid-cols-2 md:pt-16 islamic-pattern rounded-3xl px-6"
+        >
           <div>
             <p
               class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 shadow-sm"
             >
               <span class="h-2 w-2 rounded-full bg-brand-orange"></span>
-              Ethical Finance, built for trust
+              Ethical Transparency, built for trust
             </p>
 
             <h1 class="mt-6 text-balance text-4xl font-bold leading-tight text-charcoal md:text-5xl">
@@ -141,9 +261,9 @@
             </h1>
 
             <p class="mt-5 max-w-xl text-pretty text-base leading-relaxed text-slate-500">
-              Mizan Software builds AI-driven Islamic fintech on an Interest-Free (Riba-Free) Ledger—bringing
-              blockchain transparency to Murabaha, Musharakah, Sukuk tokenization, and Zakat Management with real-time
-              Sharia auditing.
+              Mizan Software builds Blockchain-Powered, Sharia-Compliant (AAOIFI) Islamic fintech on an Immutable Ledger
+              (Interest-Free / Riba-Free)—bringing Ethical Transparency and Smart Contracts for Murabaha/Sukuk,
+              alongside real-time Sharia auditing.
             </p>
 
             <div class="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -164,7 +284,7 @@
               </a>
             </div>
 
-            <div class="mt-10 grid grid-cols-3 gap-6">
+            <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
               <div>
                 <div class="text-lg font-bold text-charcoal">99.9%</div>
                 <div class="mt-1 text-xs font-medium text-slate-500">Uptime-ready</div>
@@ -251,7 +371,7 @@
                   <i data-lucide="book-open" class="h-5 w-5 text-brand-orange"></i>
                 </div>
                 <div>
-                  <h3 class="text-base font-semibold text-charcoal">Interest-Free (Riba-Free) Ledger</h3>
+                  <h3 class="text-base font-semibold text-charcoal">Immutable Ledger (Riba-Free)</h3>
                   <p class="mt-1 text-sm leading-relaxed text-slate-500">
                     Transparent, append-only records that support Ethical Finance and reduce ambiguity across transactions.
                   </p>
@@ -293,9 +413,9 @@
                   <i data-lucide="coins" class="h-5 w-5 text-brand-orange"></i>
                 </div>
                 <div>
-                  <h3 class="text-base font-semibold text-charcoal">Sukuk Tokenization</h3>
+                  <h3 class="text-base font-semibold text-charcoal">Smart Contracts for Sukuk</h3>
                   <p class="mt-1 text-sm leading-relaxed text-slate-500">
-                    Fractionalize and manage Sukuk with transparent issuance, lifecycle events, and investor reporting.
+                    Fractionalize and manage Sukuk with smart contract issuance, lifecycle events, and investor reporting.
                   </p>
                 </div>
               </div>
@@ -343,15 +463,11 @@
           <div class="grid grid-cols-1 gap-10 md:grid-cols-4">
             <div class="space-y-4">
               <a href="./index.html" class="flex items-center gap-2">
-                <span
-                  class="grid h-9 w-9 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15"
-                >
-                  <i data-lucide="sparkles" class="h-5 w-5 text-brand-orange"></i>
-                </span>
+                <img src="logo.ico" alt="Mizan Logo" class="h-8" />
                 <span class="text-sm font-semibold tracking-wide text-charcoal">Mizan Software</span>
               </a>
               <p class="max-w-xs text-sm leading-relaxed text-slate-500">
-                AI-driven Islamic Finance on a Riba-Free Ledger.
+                Blockchain-Powered, Sharia-Compliant (AAOIFI) finance on an Immutable Ledger.
               </p>
             </div>
 
@@ -396,24 +512,374 @@
     <script>
       window.addEventListener("load", () => {
         const overlay = document.getElementById("intro-overlay");
+        const authButton = document.getElementById("authButton");
+        const authNotice = document.getElementById("authNotice");
+        const authEmail = document.getElementById("authEmail");
+        const profileMenu = document.getElementById("profileMenu");
+        const profileButton = document.getElementById("profileButton");
+        const profileDropdown = document.getElementById("profileDropdown");
+        const profileEmail = document.getElementById("profileEmail");
+        const profileSince = document.getElementById("profileSince");
+        const profileDashboard = document.getElementById("profileDashboard");
+        const resendVerification = document.getElementById("resendVerification");
+        const logoutButton = document.getElementById("logoutButton");
+        const loginModal = document.getElementById("loginModal");
+        const authModeLogin = document.getElementById("authModeLogin");
+        const authModeSignup = document.getElementById("authModeSignup");
+        const loginModalTitle = document.getElementById("loginModalTitle");
+        const loginModalSubtitle = document.getElementById("loginModalSubtitle");
+        const loginSubmitText = document.getElementById("loginSubmitText");
+        const loginModalClose = document.getElementById("loginModalClose");
+        const loginForm = document.getElementById("loginForm");
+        const loginMessage = document.getElementById("loginMessage");
+        const loginError = document.getElementById("loginError");
+        const loginEmail = document.getElementById("loginEmail");
+        const loginPassword = document.getElementById("loginPassword");
+        const confirmPasswordRow = document.getElementById("confirmPasswordRow");
+        const loginPasswordConfirm = document.getElementById("loginPasswordConfirm");
 
         if (window.lucide) window.lucide.createIcons();
 
-        if (!overlay) return;
+        let authMode = "login";
 
-        document.documentElement.classList.add("overflow-hidden");
+        const setAuthNotice = (message) => {
+          if (!authNotice) return;
+          authNotice.textContent = message ?? "";
+          if (message) authNotice.classList.remove("hidden");
+          else authNotice.classList.add("hidden");
+        };
 
-        const removeOverlay = () => {
-          if (!overlay.isConnected) return;
-          overlay.remove();
+        const formatMemberSince = (creationTime) => {
+          if (!creationTime) return "";
+          const date = new Date(creationTime);
+          if (Number.isNaN(date.getTime())) return "";
+          return date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+        };
+
+        const getEmailInitial = (email) => {
+          const value = (email ?? "").trim();
+          if (!value) return "U";
+          return value[0].toUpperCase();
+        };
+
+        const setAuthMode = (nextMode) => {
+          authMode = nextMode === "signup" ? "signup" : "login";
+          if (loginMessage) loginMessage.textContent = "";
+          if (loginError) loginError.textContent = "";
+          if (loginModalTitle) loginModalTitle.textContent = authMode === "signup" ? "Create Account" : "Login";
+          if (loginModalSubtitle) {
+            loginModalSubtitle.textContent =
+              authMode === "signup"
+                ? "Create an account to access your dashboard."
+                : "Sign in to access your dashboard.";
+          }
+          if (loginSubmitText) loginSubmitText.textContent = authMode === "signup" ? "Create Account" : "Sign In";
+          if (loginPassword) loginPassword.setAttribute("autocomplete", authMode === "signup" ? "new-password" : "current-password");
+          if (confirmPasswordRow) confirmPasswordRow.classList.toggle("hidden", authMode !== "signup");
+          if (loginPasswordConfirm) {
+            if (authMode === "signup") loginPasswordConfirm.setAttribute("required", "true");
+            else loginPasswordConfirm.removeAttribute("required");
+          }
+
+          if (authModeLogin) {
+            authModeLogin.classList.toggle("bg-white", authMode === "login");
+            authModeLogin.classList.toggle("text-charcoal", authMode === "login");
+            authModeLogin.classList.toggle("shadow-sm", authMode === "login");
+            authModeLogin.classList.toggle("ring-1", authMode === "login");
+            authModeLogin.classList.toggle("ring-slate-200/70", authMode === "login");
+            authModeLogin.classList.toggle("text-slate-600", authMode !== "login");
+          }
+
+          if (authModeSignup) {
+            authModeSignup.classList.toggle("bg-white", authMode === "signup");
+            authModeSignup.classList.toggle("text-charcoal", authMode === "signup");
+            authModeSignup.classList.toggle("shadow-sm", authMode === "signup");
+            authModeSignup.classList.toggle("ring-1", authMode === "signup");
+            authModeSignup.classList.toggle("ring-slate-200/70", authMode === "signup");
+            authModeSignup.classList.toggle("text-slate-600", authMode !== "signup");
+          }
+        };
+
+        const openLoginModal = () => {
+          if (!loginModal) return;
+          loginModal.classList.remove("hidden");
+          loginModal.classList.add("flex");
+          loginModal.setAttribute("aria-hidden", "false");
+          document.documentElement.classList.add("overflow-hidden");
+          if (loginMessage) loginMessage.textContent = "";
+          if (loginError) loginError.textContent = "";
+          if (loginEmail) loginEmail.focus();
+        };
+
+        const closeLoginModal = () => {
+          if (!loginModal) return;
+          loginModal.classList.add("hidden");
+          loginModal.classList.remove("flex");
+          loginModal.setAttribute("aria-hidden", "true");
           document.documentElement.classList.remove("overflow-hidden");
         };
 
-        window.setTimeout(() => {
-          overlay.classList.add("intro-overlay--hide");
-          overlay.addEventListener("transitionend", removeOverlay, { once: true });
-          window.setTimeout(removeOverlay, 900);
-        }, 3000);
+        // {{ edit_1 }} Add Dashboard link protection helpers
+        const dashboardLinks = Array.from(
+          document.querySelectorAll('a[href$="platform.html"], a[href*="/platform.html"]')
+        );
+
+        const updateDashboardLinks = (user) => {
+          const isVerified = !!(user && user.emailVerified);
+          const lockedMsg = user
+            ? "Verify your email to access Dashboard."
+            : "Sign in to access your Dashboard.";
+
+          dashboardLinks.forEach((link) => {
+            if (isVerified) {
+              // enable navigation
+              link.setAttribute("href", "./platform.html");
+              link.removeAttribute("aria-disabled");
+              link.classList.remove("pointer-events-none", "opacity-50", "cursor-not-allowed");
+              link.onclick = null;
+            } else {
+              // disable and intercept
+              link.setAttribute("href", "#");
+              link.setAttribute("aria-disabled", "true");
+              link.classList.add("pointer-events-none", "opacity-50", "cursor-not-allowed");
+              link.onclick = (event) => {
+                event.preventDefault();
+                setAuthNotice(lockedMsg);
+                if (!user) openLoginModal();
+              };
+            }
+          });
+        };
+
+        const setSignedOutUI = () => {
+          if (!authButton) return;
+          if (authEmail) {
+            authEmail.textContent = "";
+            authEmail.classList.add("hidden");
+          }
+          setAuthNotice("");
+          if (profileMenu) profileMenu.classList.add("hidden");
+          authButton.classList.remove("hidden");
+          authButton.textContent = "Sign In";
+          authButton.setAttribute("href", "#login");
+          authButton.onclick = (event) => {
+            if (!loginModal) return;
+            event.preventDefault();
+            openLoginModal();
+          };
+          // {{ edit_2 }} Lock Dashboard links when signed out
+          updateDashboardLinks(null);
+        };
+
+        const setUnverifiedUI = (user) => {
+          if (!authButton) return;
+          if (profileMenu) profileMenu.classList.add("hidden");
+          if (authEmail) {
+            authEmail.textContent = user?.email ?? "";
+            authEmail.classList.remove("hidden");
+          }
+          setAuthNotice("Verify your email to access Dashboard.");
+          authButton.classList.remove("hidden");
+          authButton.textContent = "Resend Verification";
+          authButton.setAttribute("href", "#");
+          authButton.onclick = async (event) => {
+            event.preventDefault();
+            if (!window.firebase || !firebase.auth) return;
+            const currentUser = firebase.auth().currentUser;
+            if (!currentUser) return;
+            try {
+              await currentUser.sendEmailVerification();
+              setAuthNotice("A verification email has been sent. Please check your inbox to activate your account.");
+            } catch (error) {
+              setAuthNotice(error?.message ?? "Unable to resend verification email.");
+            }
+          };
+          // {{ edit_3 }} Lock Dashboard links when unverified
+          updateDashboardLinks(user);
+        };
+
+        const setVerifiedUI = (user) => {
+          if (authButton) authButton.classList.add("hidden");
+          if (authEmail) {
+            authEmail.textContent = "";
+            authEmail.classList.add("hidden");
+          }
+          setAuthNotice("");
+          if (!profileMenu || !profileButton) return;
+          profileMenu.classList.remove("hidden");
+          profileButton.textContent = getEmailInitial(user?.email);
+          if (profileEmail) profileEmail.textContent = user?.email ?? "";
+          if (profileSince) {
+            const since = formatMemberSince(user?.metadata?.creationTime);
+            profileSince.textContent = since ? `Member since: ${since}` : "";
+          }
+          if (profileDashboard) profileDashboard.setAttribute("href", "./platform.html");
+          if (resendVerification) resendVerification.classList.add("hidden");
+          // {{ edit_4 }} Unlock Dashboard links when verified
+          updateDashboardLinks(user);
+        };
+
+        const setSignedInUI = (user) => {
+          if (!user) return setSignedOutUI();
+          if (user.emailVerified) setVerifiedUI(user);
+          else setUnverifiedUI(user);
+        };
+
+        const closeProfileDropdown = () => {
+          if (!profileDropdown) return;
+          profileDropdown.classList.add("hidden");
+        };
+
+        const openProfileDropdown = () => {
+          if (!profileDropdown) return;
+          profileDropdown.classList.remove("hidden");
+          if (window.lucide) window.lucide.createIcons();
+        };
+
+        if (profileButton) {
+          profileButton.addEventListener("click", () => {
+            if (!profileDropdown) return;
+            if (profileDropdown.classList.contains("hidden")) openProfileDropdown();
+            else closeProfileDropdown();
+          });
+        }
+
+        window.addEventListener("click", (event) => {
+          if (!profileMenu || !profileDropdown || profileMenu.classList.contains("hidden")) return;
+          if (!profileMenu.contains(event.target)) closeProfileDropdown();
+        });
+
+        if (authModeLogin) {
+          authModeLogin.addEventListener("click", () => setAuthMode("login"));
+        }
+
+        if (authModeSignup) {
+          authModeSignup.addEventListener("click", () => setAuthMode("signup"));
+        }
+
+        if (loginModalClose) {
+          loginModalClose.addEventListener("click", closeLoginModal);
+        }
+
+        if (loginModal) {
+          loginModal.addEventListener("click", (event) => {
+            if (event.target === loginModal) closeLoginModal();
+          });
+          const backdrop = loginModal.querySelector("div");
+          if (backdrop) {
+            backdrop.addEventListener("click", closeLoginModal);
+          }
+          window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+              closeLoginModal();
+              closeProfileDropdown();
+            }
+          });
+        }
+
+        if (logoutButton) {
+          logoutButton.addEventListener("click", async () => {
+            if (!window.firebase || !firebase.auth) return;
+            try {
+              await firebase.auth().signOut();
+              closeProfileDropdown();
+            } catch (error) {
+              setAuthNotice(error?.message ?? "Unable to sign out.");
+            }
+          });
+        }
+
+        if (loginForm) {
+          loginForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            if (!window.firebase || !firebase.auth) {
+              if (loginError) loginError.textContent = "Authentication is unavailable. Please try again.";
+              return;
+            }
+            const email = loginEmail?.value?.trim() ?? "";
+            const password = loginPassword?.value ?? "";
+            const confirmPassword = loginPasswordConfirm?.value ?? "";
+            if (!email || !password) return;
+            if (loginError) loginError.textContent = "";
+            if (loginMessage) loginMessage.textContent = "";
+            try {
+              const auth = firebase.auth();
+              if (authMode === "signup") {
+                if (password !== confirmPassword) {
+                  if (loginError) loginError.textContent = "Passwords do not match.";
+                  return;
+                }
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const user = userCredential?.user ?? auth.currentUser;
+
+                if (window.firebase && firebase.firestore && user?.uid) {
+                  await firebase
+                    .firestore()
+                    .collection("users")
+                    .doc(user.uid)
+                    .set(
+                      {
+                        email: user.email ?? email,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                      },
+                      { merge: true }
+                    );
+                }
+
+                if (user && user.sendEmailVerification) {
+                  await user.sendEmailVerification();
+                  setAuthNotice("A verification email has been sent. Please check your inbox to activate your account.");
+                }
+              } else {
+                await auth.signInWithEmailAndPassword(email, password);
+              }
+              closeLoginModal();
+            } catch (error) {
+              if (loginError) {
+                loginError.textContent =
+                  error?.message ?? (authMode === "signup" ? "Unable to create account." : "Unable to sign in.");
+              }
+            }
+          });
+        }
+
+        if (window.firebase && firebase.auth) {
+          firebase.auth().onAuthStateChanged((user) => {
+            if (!user) return setSignedOutUI();
+            Promise.resolve(user.reload?.())
+              .catch(() => {})
+              .finally(() => {
+                const currentUser = firebase.auth().currentUser;
+                setSignedInUI(currentUser ?? user);
+              });
+          });
+        } else {
+          setSignedOutUI();
+        }
+
+        if (loginModal && (window.location.hash === "#login" || window.location.hash === "#signup")) {
+          setAuthMode(window.location.hash === "#signup" ? "signup" : "login");
+          openLoginModal();
+        } else {
+          setAuthMode("login");
+        }
+
+        if (overlay) {
+          document.documentElement.classList.add("overflow-hidden");
+
+          const removeOverlay = () => {
+            if (!overlay.isConnected) return;
+            overlay.remove();
+            if (document.getElementById("loginModal")?.classList.contains("flex")) return;
+            document.documentElement.classList.remove("overflow-hidden");
+          };
+
+          window.setTimeout(() => {
+            overlay.classList.add("intro-overlay--hide");
+            overlay.addEventListener("transitionend", removeOverlay, { once: true });
+            window.setTimeout(removeOverlay, 900);
+          }, 3000);
+        }
       });
     </script>
   </body>

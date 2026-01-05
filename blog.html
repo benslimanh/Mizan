@@ -33,6 +33,22 @@
         },
       };
     </script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "...",
+        authDomain: "...",
+        projectId: "...",
+        storageBucket: "...",
+        messagingSenderId: "...",
+        appId: "...",
+      };
+      if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
+        firebase.initializeApp(firebaseConfig);
+      }
+    </script>
   </head>
 
   <body class="h-full bg-white font-sans text-slate-500 antialiased">
@@ -42,11 +58,7 @@
           class="mx-auto flex w-full max-w-6xl items-center justify-between rounded-2xl border border-slate-200/70 bg-white/80 px-4 py-3 shadow-soft backdrop-blur-md"
         >
           <a href="./index.html" class="flex items-center gap-2">
-            <span
-              class="grid h-9 w-9 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15"
-            >
-              <i data-lucide="sparkles" class="h-5 w-5 text-brand-orange"></i>
-            </span>
+            <img src="logo.ico" alt="Mizan Logo" class="h-8" />
             <span class="text-sm font-semibold tracking-wide text-charcoal">Mizan Software</span>
           </a>
 
@@ -63,9 +75,11 @@
           </div>
 
           <div class="flex items-center gap-2">
+            <span id="authEmail" class="hidden text-xs font-semibold text-slate-500 md:inline-flex"></span>
             <a
-              href="./contact.html"
-              class="hidden rounded-xl px-4 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 md:inline-flex"
+              id="authButton"
+              href="./index.html#login"
+              class="inline-flex rounded-xl px-4 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100"
               >Sign In</a
             >
             <a
@@ -80,7 +94,7 @@
       </header>
 
       <main class="px-4">
-        <section class="mx-auto max-w-6xl pb-10 pt-12 md:pt-16">
+        <section class="mx-auto max-w-6xl pb-10 pt-12 md:pt-16 islamic-pattern rounded-3xl px-6">
           <p
             class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 shadow-sm"
           >
@@ -89,8 +103,8 @@
           </p>
           <h1 class="mt-6 text-balance text-4xl font-bold leading-tight text-charcoal md:text-5xl">Blog</h1>
           <p class="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-slate-500">
-            Insights on Islamic fintech, Sharia governance, and audit-ready workflows—written for teams that value
-            clarity.
+            Insights on Blockchain-Powered, Sharia-Compliant (AAOIFI standards) Islamic fintech—built on an Immutable
+            Ledger with Ethical Transparency and Smart Contracts for Murabaha/Sukuk.
           </p>
         </section>
 
@@ -188,14 +202,13 @@
           <div class="grid grid-cols-1 gap-10 md:grid-cols-4">
             <div class="space-y-4">
               <a href="./index.html" class="flex items-center gap-2">
-                <span
-                  class="grid h-9 w-9 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15"
-                >
-                  <i data-lucide="sparkles" class="h-5 w-5 text-brand-orange"></i>
-                </span>
+                <img src="logo.ico" alt="Mizan Logo" class="h-8" />
                 <span class="text-sm font-semibold tracking-wide text-charcoal">Mizan Software</span>
               </a>
-              <p class="max-w-xs text-sm leading-relaxed text-slate-500">AI-driven Islamic Finance.</p>
+              <p class="max-w-xs text-sm leading-relaxed text-slate-500">
+                Blockchain-Powered, Sharia-Compliant (AAOIFI standards) finance on an Immutable Ledger with Ethical
+                Transparency and Smart Contracts for Murabaha/Sukuk.
+              </p>
             </div>
 
             <div>
@@ -239,6 +252,40 @@
     <script>
       window.addEventListener("load", () => {
         if (window.lucide) window.lucide.createIcons();
+
+        const authButton = document.getElementById("authButton");
+        const authEmail = document.getElementById("authEmail");
+
+        const setSignedOutUI = () => {
+          if (!authButton) return;
+          if (authEmail) {
+            authEmail.textContent = "";
+            authEmail.classList.add("hidden");
+          }
+          authButton.classList.remove("hidden");
+          authButton.textContent = "Sign In";
+          authButton.setAttribute("href", "./index.html#login");
+        };
+
+        const setSignedInUI = (user) => {
+          if (!authButton) return;
+          if (authEmail) {
+            authEmail.textContent = user?.email ?? "";
+            authEmail.classList.remove("hidden");
+          }
+          authButton.classList.remove("hidden");
+          authButton.textContent = "Dashboard";
+          authButton.setAttribute("href", "./platform.html");
+        };
+
+        if (window.firebase && firebase.auth) {
+          firebase.auth().onAuthStateChanged((user) => {
+            if (user) setSignedInUI(user);
+            else setSignedOutUI();
+          });
+        } else {
+          setSignedOutUI();
+        }
       });
     </script>
   </body>

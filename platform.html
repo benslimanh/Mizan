@@ -33,6 +33,134 @@
         },
       };
     </script>
+
+    <!-- Insert Firebase SDKs (compat) before the guard script if not already present -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    
+    <!-- Auth Guard: runs immediately and enforces strict access -->
+    <script type="module">
+      // Initialize Firebase if needed (same config as index.html)
+      const firebaseConfig = {
+        apiKey: "AIzaSyCBfjUajnfrFpZaaSfYx8JAyHLs2duFMw0",
+        authDomain: "mizan-auth.firebaseapp.com",
+        projectId: "mizan-auth",
+        storageBucket: "mizan-auth.firebasestorage.app",
+        messagingSenderId: "863003198174",
+        appId: "1:863003198174:web:b7215ce349318b1b03b84f",
+        measurementId: "G-R5L91BGKFC"
+      };
+    
+      if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
+        firebase.initializeApp(firebaseConfig);
+      }
+    
+      const redirectHome = () => window.location.replace("./index.html");
+    
+      const getEmailInitial = (email) => {
+        const v = (email ?? "").trim();
+        return v ? v[0].toUpperCase() : "U";
+      };
+    
+      const formatMemberSince = (creationTime) => {
+        const date = new Date(creationTime);
+        return Number.isNaN(date.getTime())
+          ? ""
+          : date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+      };
+    
+      const setVerifiedUI = (user) => {
+        const authButton = document.getElementById("authButton");
+        const authEmail = document.getElementById("authEmail");
+        const authNotice = document.getElementById("authNotice");
+        const profileMenu = document.getElementById("profileMenu");
+        const profileButton = document.getElementById("profileButton");
+        const profileDropdown = document.getElementById("profileDropdown");
+        const profileEmail = document.getElementById("profileEmail");
+        const profileSince = document.getElementById("profileSince");
+        const resendVerification = document.getElementById("resendVerification");
+        const logoutButton = document.getElementById("logoutButton");
+    
+        // Hide auth prompts
+        if (authButton) authButton.classList.add("hidden");
+        if (authEmail) {
+          authEmail.textContent = "";
+          authEmail.classList.add("hidden");
+        }
+        if (authNotice) {
+          authNotice.textContent = "";
+          authNotice.classList.add("hidden");
+        }
+    
+        // Show profile
+        if (profileMenu) profileMenu.classList.remove("hidden");
+        if (profileButton) profileButton.textContent = getEmailInitial(user?.email);
+        if (profileEmail) profileEmail.textContent = user?.email ?? "";
+        if (profileSince) {
+          const since = formatMemberSince(user?.metadata?.creationTime);
+          profileSince.textContent = since ? `Member since: ${since}` : "";
+        }
+        if (resendVerification) resendVerification.classList.add("hidden");
+    
+        // Dropdown toggle
+        if (profileButton && profileDropdown) {
+          profileButton.addEventListener("click", () => {
+            profileDropdown.classList.toggle("hidden");
+            if (window.lucide) window.lucide.createIcons();
+          });
+          window.addEventListener("click", (event) => {
+            const pm = document.getElementById("profileMenu");
+            const pd = document.getElementById("profileDropdown");
+            if (!pm || pm.classList.contains("hidden")) return;
+            if (!pm.contains(event.target)) pd?.classList.add("hidden");
+          });
+          window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") document.getElementById("profileDropdown")?.classList.add("hidden");
+          });
+        }
+    
+        // Logout
+        if (logoutButton) {
+          logoutButton.addEventListener("click", async () => {
+            try {
+              await firebase.auth().signOut();
+              redirectHome();
+            } catch (e) {
+              if (authNotice) {
+                authNotice.textContent = e?.message ?? "Unable to sign out.";
+                authNotice.classList.remove("hidden");
+              }
+            }
+          });
+        }
+      };
+    
+      // Strict Auth Guard
+      const enforceAccess = () => {
+        if (!window.firebase || !firebase.auth) {
+          redirectHome();
+          return;
+        }
+        firebase.auth().onAuthStateChanged(async (user) => {
+          if (!user) {
+            redirectHome();
+            return;
+          }
+          try {
+            await user.reload?.();
+          } catch (_) {}
+          const currentUser = firebase.auth().currentUser ?? user;
+          if (!currentUser?.emailVerified) {
+            alert("Access Denied: Please verify your email first.");
+            redirectHome();
+            return;
+          }
+          setVerifiedUI(currentUser);
+        });
+      };
+    
+      enforceAccess();
+    </script>
   </head>
 
   <body class="h-full bg-white font-sans text-slate-500 antialiased">
@@ -42,11 +170,7 @@
           class="mx-auto flex w-full max-w-6xl items-center justify-between rounded-2xl border border-slate-200/70 bg-white/80 px-4 py-3 shadow-soft backdrop-blur-md"
         >
           <a href="./index.html" class="flex items-center gap-2">
-            <span
-              class="grid h-9 w-9 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15"
-            >
-              <i data-lucide="sparkles" class="h-5 w-5 text-brand-orange"></i>
-            </span>
+            <img src="logo.ico" alt="Mizan Logo" class="h-8" />
             <span class="text-sm font-semibold tracking-wide text-charcoal">Mizan Software</span>
           </a>
 
@@ -61,9 +185,11 @@
           </div>
 
           <div class="flex items-center gap-2">
+            <span id="authEmail" class="hidden text-xs font-semibold text-slate-500 md:inline-flex"></span>
             <a
-              href="./contact.html"
-              class="hidden rounded-xl px-4 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 md:inline-flex"
+              id="authButton"
+              href="./index.html#login"
+              class="inline-flex rounded-xl px-4 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100"
               >Sign In</a
             >
             <a
@@ -93,7 +219,8 @@
 
             <p class="mt-5 max-w-xl text-pretty text-base leading-relaxed text-slate-500">
               A clean, modular foundation with strong controls, audit trails, and performance-ready infrastructure—
-              designed for Sharia-compliant transaction workflows and reviewable governance.
+              designed for Blockchain-Powered, Sharia-Compliant (AAOIFI standards) workflows on an Immutable Ledger,
+              delivering Ethical Transparency with Smart Contracts for Murabaha/Sukuk and reviewable governance.
             </p>
 
             <div class="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -212,14 +339,12 @@
           <div class="grid grid-cols-1 gap-10 md:grid-cols-4">
             <div class="space-y-4">
               <a href="./index.html" class="flex items-center gap-2">
-                <span
-                  class="grid h-9 w-9 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15"
-                >
-                  <i data-lucide="sparkles" class="h-5 w-5 text-brand-orange"></i>
-                </span>
+                <img src="logo.ico" alt="Mizan Logo" class="h-8" />
                 <span class="text-sm font-semibold tracking-wide text-charcoal">Mizan Software</span>
               </a>
-              <p class="max-w-xs text-sm leading-relaxed text-slate-500">AI-driven Islamic Finance.</p>
+              <p class="max-w-xs text-sm leading-relaxed text-slate-500">
+                Blockchain-Powered, Sharia-Compliant (AAOIFI) finance on an Immutable Ledger.
+              </p>
             </div>
 
             <div>
@@ -263,6 +388,40 @@
     <script>
       window.addEventListener("load", () => {
         if (window.lucide) window.lucide.createIcons();
+
+        const authButton = document.getElementById("authButton");
+        const authEmail = document.getElementById("authEmail");
+
+        const setSignedOutUI = () => {
+          if (!authButton) return;
+          if (authEmail) {
+            authEmail.textContent = "";
+            authEmail.classList.add("hidden");
+          }
+          authButton.classList.remove("hidden");
+          authButton.textContent = "Sign In";
+          authButton.setAttribute("href", "./index.html#login");
+        };
+
+        const setSignedInUI = (user) => {
+          if (!authButton) return;
+          if (authEmail) {
+            authEmail.textContent = user?.email ?? "";
+            authEmail.classList.remove("hidden");
+          }
+          authButton.classList.remove("hidden");
+          authButton.textContent = "Dashboard";
+          authButton.setAttribute("href", "./platform.html");
+        };
+
+        if (window.firebase && firebase.auth) {
+          firebase.auth().onAuthStateChanged((user) => {
+            if (user) setSignedInUI(user);
+            else setSignedOutUI();
+          });
+        } else {
+          setSignedOutUI();
+        }
       });
     </script>
   </body>
