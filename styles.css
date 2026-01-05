@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes introPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.86;
+  }
+}
+
+@keyframes introTextIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-overlay {
+  opacity: 1;
+  transition: opacity 650ms ease;
+}
+
+.intro-overlay--hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-logo {
+  animation: introPulse 1.25s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.intro-text {
+  opacity: 0;
+  animation: introTextIn 850ms ease forwards;
+  animation-delay: 180ms;
+}
+
+.abstract-illustration {
+  background:
+    radial-gradient(800px 320px at 30% 20%, rgba(249, 115, 22, 0.22), transparent 60%),
+    radial-gradient(760px 360px at 70% 60%, rgba(30, 41, 59, 0.12), transparent 55%),
+    repeating-linear-gradient(
+      120deg,
+      rgba(30, 41, 59, 0.08) 0px,
+      rgba(30, 41, 59, 0.08) 2px,
+      transparent 2px,
+      transparent 16px
+    ),
+    repeating-linear-gradient(
+      30deg,
+      rgba(249, 115, 22, 0.10) 0px,
+      rgba(249, 115, 22, 0.10) 2px,
+      transparent 2px,
+      transparent 20px
+    );
+}
+
