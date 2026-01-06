@@ -163,264 +163,358 @@
     </script>
   </head>
 
-  <body class="h-full bg-white font-sans text-slate-500 antialiased">
-    <div class="min-h-full">
-      <header class="sticky top-4 z-40 px-4">
-        <nav
-          class="mx-auto flex w-full max-w-6xl items-center justify-between rounded-2xl border border-slate-200/70 bg-white/80 px-4 py-3 shadow-soft backdrop-blur-md"
-        >
-          <a href="./index.html" class="flex items-center gap-2">
-            <img src="logo.ico" alt="Mizan Logo" class="h-8" />
-            <span class="text-sm font-semibold tracking-wide text-charcoal">Mizan Software</span>
-          </a>
-
-          <div class="hidden items-center gap-7 md:flex">
-            <a href="./features.html" class="text-sm font-medium text-slate-600 hover:text-charcoal"
-              >Features</a
-            >
-            <a href="./platform.html" class="text-sm font-medium text-charcoal">Platform</a>
-            <a href="./contact.html" class="text-sm font-medium text-slate-600 hover:text-charcoal"
-              >Contact</a
-            >
-          </div>
-
-          <div class="flex items-center gap-2">
-            <span id="authEmail" class="hidden text-xs font-semibold text-slate-500 md:inline-flex"></span>
-            <a
-              id="authButton"
-              href="./index.html#login"
-              class="inline-flex rounded-xl px-4 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100"
-              >Sign In</a
-            >
-            <a
-              href="./contact.html"
-              class="inline-flex items-center gap-2 rounded-xl bg-brand-orange px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
-            >
-              <i data-lucide="arrow-right" class="h-4 w-4"></i>
-              Get a Demo
-            </a>
-          </div>
+  <body class="h-full bg-slate-50 font-sans text-slate-500 antialiased">
+    <div class="min-h-screen">
+      <aside class="fixed inset-y-0 left-0 w-[250px] bg-slate-900 text-white">
+        <div id="sidebarLogo" class="flex items-center gap-2 px-4 py-4 border-b border-slate-800 cursor-pointer">
+          <img src="logo.ico" alt="Mizan Logo" class="h-8" />
+          <span class="text-sm font-semibold tracking-wide">Mizan Software</span>
+        </div>
+        <nav class="px-4 py-4 space-y-1">
+          <a href="#" id="link-dashboard" data-view="dashboard" class="block rounded-lg px-3 py-2 text-sm hover:bg-slate-800">Dashboard</a>
+          <a href="#" id="link-wallet" data-view="wallet" class="block rounded-lg px-3 py-2 text-sm hover:bg-slate-800">My Wallet</a>
+          <a href="#" id="link-sukuk" data-view="sukuk" class="block rounded-lg px-3 py-2 text-sm hover:bg-slate-800">Sukuk Market</a>
+          <a href="#" id="link-contracts" data-view="contracts" class="block rounded-lg px-3 py-2 text-sm hover:bg-slate-800">Smart Contracts</a>
+          <a href="#" id="link-zakat" data-view="zakat" class="block rounded-lg px-3 py-2 text-sm hover:bg-slate-800">Zakat</a>
+          <a href="#" id="link-settings" data-view="settings" class="block rounded-lg px-3 py-2 text-sm hover:bg-slate-800">Settings</a>
         </nav>
-      </header>
+      </aside>
 
-      <main class="px-4">
-        <section class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 pb-12 pt-12 md:grid-cols-2 md:pt-16">
-          <div>
-            <p
-              class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 shadow-sm"
-            >
-              <span class="h-2 w-2 rounded-full bg-brand-orange"></span>
-              Platform architecture
-            </p>
-
-            <h1 class="mt-6 text-balance text-4xl font-bold leading-tight text-charcoal md:text-5xl">
-              Built for Scale, Security, and Sharia Integrity.
-            </h1>
-
-            <p class="mt-5 max-w-xl text-pretty text-base leading-relaxed text-slate-500">
-              A clean, modular foundation with strong controls, audit trails, and performance-ready infrastructure—
-              designed for Blockchain-Powered, Sharia-Compliant (AAOIFI standards) workflows on an Immutable Ledger,
-              delivering Ethical Transparency with Smart Contracts for Murabaha/Sukuk and reviewable governance.
-            </p>
-
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="./security.html"
-                class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
+      <div class="ml-[250px]">
+        <header class="sticky top-0 z-50 bg-white border-b border-slate-200">
+          <div class="flex items-center justify-end px-4 py-3">
+            <button class="rounded-xl p-2 text-slate-500 hover:bg-slate-100" aria-label="Notifications">
+              <i data-lucide="bell" class="h-5 w-5"></i>
+            </button>
+            <div id="profileMenu" class="relative ml-2">
+              <button
+                id="profileButton"
+                class="grid h-10 w-10 place-items-center rounded-full bg-brand-orange text-sm font-bold text-white shadow-sm shadow-brand-orange/20"
+              ></button>
+              <div
+                id="profileDropdown"
+                class="absolute right-0 mt-3 hidden w-80 rounded-3xl border border-slate-200 bg-white/80 p-5 shadow-soft backdrop-blur-md"
               >
-                <i data-lucide="shield-check" class="h-4 w-4"></i>
-                Security Overview
-              </a>
-              <a
-                href="./features.html"
-                class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
-              >
-                <i data-lucide="layout-grid" class="h-4 w-4 text-brand-orange"></i>
-                Explore Features
-              </a>
+                <div class="text-xs font-semibold tracking-[0.22em] text-slate-400">PROFILE</div>
+                <div id="profileEmail" class="mt-3 text-sm font-semibold text-charcoal"></div>
+                <div id="profileSince" class="mt-1 text-xs font-semibold text-slate-500"></div>
+
+                <div class="mt-5 flex flex-col gap-2">
+                  <button
+                    type="button"
+                    id="logoutButton"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
+                  >
+                    <i data-lucide="log-out" class="h-4 w-4 text-brand-orange"></i>
+                    Logout
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
+        </header>
 
-          <div class="relative">
-            <div
-              class="abstract-illustration relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-soft"
+        <div id="verificationBanner" class="hidden bg-orange-100 border-y border-orange-200">
+          <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+            <div class="text-sm font-semibold text-charcoal">Your email is not verified.</div>
+            <button
+              type="button"
+              id="resendVerification"
+              class="inline-flex items-center justify-center gap-2 rounded-xl border border-orange-300 bg-white px-4 py-2 text-sm font-semibold text-charcoal shadow-sm hover:bg-orange-50"
             >
-              <div class="absolute inset-0 bg-gradient-to-tr from-white via-white/60 to-brand-orange/10"></div>
-
-              <div class="absolute left-6 top-6 h-12 w-44 rounded-2xl bg-white/80 shadow-sm ring-1 ring-slate-200/70 backdrop-blur">
-                <div class="flex h-full items-center gap-3 px-4">
-                  <span class="grid h-8 w-8 place-items-center rounded-xl bg-slate-100 ring-1 ring-slate-200/70">
-                    <i data-lucide="lock" class="h-4 w-4 text-charcoal"></i>
-                  </span>
-                  <div class="text-xs font-semibold text-charcoal">Access Controls</div>
-                </div>
-              </div>
-
-              <div class="absolute bottom-6 right-6 h-14 w-48 rounded-2xl bg-white/80 shadow-sm ring-1 ring-slate-200/70 backdrop-blur">
-                <div class="flex h-full items-center gap-3 px-4">
-                  <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
-                    <i data-lucide="activity" class="h-4 w-4 text-brand-orange"></i>
-                  </span>
-                  <div class="text-xs font-semibold text-charcoal">Observability</div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="pointer-events-none absolute -inset-2 -z-10 rounded-[2rem] bg-gradient-to-tr from-brand-orange/15 via-transparent to-slate-200/60 blur-2xl"
-            ></div>
-          </div>
-        </section>
-
-        <section class="mx-auto max-w-6xl pb-16 islamic-pattern rounded-3xl">
-          <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
-              <h2 class="text-2xl font-bold text-charcoal">How it works</h2>
-              <p class="mt-2 max-w-2xl text-sm leading-relaxed text-slate-500">
-                A simple, auditable flow for Sharia-compliant transactions—kept modular so teams can extend safely.
-              </p>
-            </div>
-          </div>
-
-          <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-            <div class="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-soft">
-              <div class="flex items-start gap-4">
-                <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
-                  <i data-lucide="inbox" class="h-5 w-5 text-brand-orange"></i>
-                </div>
-                <div>
-                  <div class="text-xs font-semibold tracking-[0.22em] text-slate-400">STEP 01</div>
-                  <h3 class="mt-2 text-base font-semibold text-charcoal">Capture</h3>
-                  <p class="mt-1 text-sm leading-relaxed text-slate-500">
-                    Intake Murabaha, Musharakah, Sukuk, and Zakat workflows with structured fields and clear ownership.
-                  </p>
-                </div>
-              </div>
-              <div class="pointer-events-none absolute -right-12 -top-14 h-44 w-44 rounded-full bg-brand-orange/10 blur-2xl"></div>
-            </div>
-
-            <div class="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-soft">
-              <div class="flex items-start gap-4">
-                <div class="grid h-11 w-11 place-items-center rounded-xl bg-slate-100 ring-1 ring-slate-200/70">
-                  <i data-lucide="sliders-horizontal" class="h-5 w-5 text-charcoal"></i>
-                </div>
-                <div>
-                  <div class="text-xs font-semibold tracking-[0.22em] text-slate-400">STEP 02</div>
-                  <h3 class="mt-2 text-base font-semibold text-charcoal">Automate</h3>
-                  <p class="mt-1 text-sm leading-relaxed text-slate-500">
-                    Apply AAOIFI-aligned controls, Sharia review steps, and risk signals that stay explainable.
-                  </p>
-                </div>
-              </div>
-              <div class="pointer-events-none absolute -left-16 -bottom-16 h-56 w-56 rounded-full bg-slate-200/60 blur-2xl"></div>
-            </div>
-
-            <div class="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-soft">
-              <div class="flex items-start gap-4">
-                <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
-                  <i data-lucide="badge-check" class="h-5 w-5 text-brand-orange"></i>
-                </div>
-                <div>
-                  <div class="text-xs font-semibold tracking-[0.22em] text-slate-400">STEP 03</div>
-                  <h3 class="mt-2 text-base font-semibold text-charcoal">Decide</h3>
-                  <p class="mt-1 text-sm leading-relaxed text-slate-500">
-                    Ship outcomes with an audit trail and dashboards that support Ethical Finance and reduce uncertainty.
-                  </p>
-                </div>
-              </div>
-              <div class="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-brand-orange/10 blur-2xl"></div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer class="bg-slate-50">
-        <div class="mx-auto max-w-6xl px-4 pb-10 pt-12">
-          <div class="grid grid-cols-1 gap-10 md:grid-cols-4">
-            <div class="space-y-4">
-              <a href="./index.html" class="flex items-center gap-2">
-                <img src="logo.ico" alt="Mizan Logo" class="h-8" />
-                <span class="text-sm font-semibold tracking-wide text-charcoal">Mizan Software</span>
-              </a>
-              <p class="max-w-xs text-sm leading-relaxed text-slate-500">
-                Blockchain-Powered, Sharia-Compliant (AAOIFI) finance on an Immutable Ledger.
-              </p>
-            </div>
-
-            <div>
-              <div class="text-sm font-semibold text-charcoal">Company</div>
-              <ul class="mt-4 space-y-3 text-sm">
-                <li><a class="text-slate-600 hover:text-charcoal" href="./about.html">About</a></li>
-                <li><a class="text-slate-600 hover:text-charcoal" href="./careers.html">Careers</a></li>
-                <li><a class="text-slate-600 hover:text-charcoal" href="./press.html">Press</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <div class="text-sm font-semibold text-charcoal">Resources</div>
-              <ul class="mt-4 space-y-3 text-sm">
-                <li><a class="text-slate-600 hover:text-charcoal" href="./blog.html">Blog</a></li>
-                <li><a class="text-slate-600 hover:text-charcoal" href="./guides.html">Guides</a></li>
-                <li><a class="text-slate-600 hover:text-charcoal" href="./help.html">Help Center</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <div class="text-sm font-semibold text-charcoal">Legal</div>
-              <ul class="mt-4 space-y-3 text-sm">
-                <li><a class="text-slate-600 hover:text-charcoal" href="./privacy.html">Privacy</a></li>
-                <li><a class="text-slate-600 hover:text-charcoal" href="./terms.html">Terms</a></li>
-                <li><a class="text-slate-600 hover:text-charcoal" href="./security.html">Security</a></li>
-              </ul>
-            </div>
+              <i data-lucide="mail" class="h-4 w-4 text-brand-orange"></i>
+              Resend Link
+            </button>
           </div>
         </div>
 
-        <div class="border-t border-slate-200">
-          <div class="mx-auto max-w-6xl px-4 py-6">
-            <div class="text-xs text-slate-500">© 2026 Mizan Software. All rights reserved.</div>
-          </div>
-        </div>
-      </footer>
+        <main class="px-4 py-6">
+          <section id="view-dashboard">
+            <section class="mx-auto max-w-6xl">
+              <h1 class="text-2xl font-bold text-charcoal">
+                As-salamu alaykum, <span id="welcomeEmail" class="font-semibold"></span>
+              </h1>
+            </section>
+
+            <section class="mx-auto max-w-6xl mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+              <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="text-sm font-semibold text-slate-500">Balance</div>
+                <div class="mt-2 text-2xl font-bold text-charcoal">$25,400</div>
+              </div>
+              <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="text-sm font-semibold text-slate-500">Active Contracts</div>
+                <div class="mt-2 text-2xl font-bold text-charcoal">12</div>
+              </div>
+              <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="text-sm font-semibold text-slate-500">Zakat</div>
+                <div class="mt-2 text-2xl font-bold text-charcoal">$1,250</div>
+              </div>
+            </section>
+
+            <section class="mx-auto max-w-6xl mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div class="flex items-center justify-between">
+                <div class="text-base font-semibold text-charcoal">Transactions</div>
+                <div class="text-xs font-medium text-slate-500">Blockchain History</div>
+              </div>
+              <div class="mt-4 overflow-x-auto">
+                <table class="min-w-full text-sm">
+                  <thead>
+                    <tr class="text-left text-slate-500">
+                      <th class="py-2 pr-4">Hash</th>
+                      <th class="py-2 pr-4">Type</th>
+                      <th class="py-2 pr-4">Asset</th>
+                      <th class="py-2 pr-4">Amount</th>
+                      <th class="py-2 pr-4">Status</th>
+                      <th class="py-2 pr-4">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-charcoal">
+                    <tr class="border-t border-slate-200">
+                      <td class="py-2 pr-4 font-mono text-xs">0x9f...ab12</td>
+                      <td class="py-2 pr-4">Murabaha</td>
+                      <td class="py-2 pr-4">Equipment</td>
+                      <td class="py-2 pr-4">$3,000</td>
+                      <td class="py-2 pr-4 text-emerald-600 font-semibold">Confirmed</td>
+                      <td class="py-2 pr-4">2026-01-01</td>
+                    </tr>
+                    <tr class="border-t border-slate-200">
+                      <td class="py-2 pr-4 font-mono text-xs">0x3c...74e9</td>
+                      <td class="py-2 pr-4">Sukuk</td>
+                      <td class="py-2 pr-4">Bond A</td>
+                      <td class="py-2 pr-4">$12,000</td>
+                      <td class="py-2 pr-4 text-amber-600 font-semibold">Pending</td>
+                      <td class="py-2 pr-4">2026-01-03</td>
+                    </tr>
+                    <tr class="border-t border-slate-200">
+                      <td class="py-2 pr-4 font-mono text-xs">0x7a...0df1</td>
+                      <td class="py-2 pr-4">Zakat</td>
+                      <td class="py-2 pr-4">Donation</td>
+                      <td class="py-2 pr-4">$250</td>
+                      <td class="py-2 pr-4 text-emerald-600 font-semibold">Confirmed</td>
+                      <td class="py-2 pr-4">2026-01-04</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </section>
+
+          <section id="view-wallet" class="hidden">
+            <section class="mx-auto max-w-6xl">
+              <h1 class="text-2xl font-bold text-charcoal">My Digital Wallet</h1>
+            </section>
+
+            <section class="mx-auto max-w-6xl mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+              <div class="md:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <div class="text-sm font-semibold text-slate-500">Total Balance</div>
+                    <div class="mt-2 text-3xl font-bold text-charcoal">$12,450.00</div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button class="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700">
+                      <i data-lucide="download" class="h-4 w-4"></i>
+                      Deposit
+                    </button>
+                    <button class="inline-flex items-center gap-2 rounded-xl border border-orange-300 bg-white px-4 py-2 text-sm font-semibold text-orange-600 hover:bg-orange-50">
+                      <i data-lucide="upload" class="h-4 w-4 text-orange-600"></i>
+                      Withdraw
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="text-sm font-semibold text-charcoal">Asset Breakdown</div>
+                <div class="mt-3 space-y-2">
+                  <div class="flex items-center justify-between"><span class="text-slate-600">Cash</span><span class="font-semibold text-charcoal">40%</span></div>
+                  <div class="flex items-center justify-between"><span class="text-slate-600">Sukuk</span><span class="font-semibold text-charcoal">60%</span></div>
+                </div>
+                <div class="mt-4 h-32 rounded-xl bg-slate-100 grid place-items-center text-xs text-slate-500">Pie Chart Placeholder</div>
+              </div>
+            </section>
+
+            <section class="mx-auto max-w-6xl mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div class="text-base font-semibold text-charcoal">Wallet History</div>
+              <ul class="mt-4 divide-y divide-slate-200 text-sm">
+                <li class="py-2 flex items-center justify-between">
+                  <span class="text-slate-600">Deposit</span>
+                  <span class="font-semibold text-emerald-600">+$500.00</span>
+                  <span class="text-xs text-slate-500">2026-01-02</span>
+                </li>
+                <li class="py-2 flex items-center justify-between">
+                  <span class="text-slate-600">Withdraw</span>
+                  <span class="font-semibold text-orange-600">-$250.00</span>
+                  <span class="text-xs text-slate-500">2026-01-03</span>
+                </li>
+                <li class="py-2 flex items-center justify-between">
+                  <span class="text-slate-600">Deposit</span>
+                  <span class="font-semibold text-emerald-600">+$1,200.00</span>
+                  <span class="text-xs text-slate-500">2026-01-05</span>
+                </li>
+              </ul>
+            </section>
+          </section>
+
+          <section id="view-sukuk" class="hidden">
+            <section class="mx-auto max-w-6xl grid place-items-center py-16">
+              <div class="text-center">
+                <i data-lucide="layers" class="mx-auto h-14 w-14 text-slate-400"></i>
+                <h1 class="mt-4 text-2xl font-bold text-charcoal">Sukuk Market</h1>
+                <p class="mt-2 text-sm text-slate-500">Coming soon: market listings and analytics.</p>
+              </div>
+            </section>
+          </section>
+
+          <section id="view-contracts" class="hidden">
+            <section class="mx-auto max-w-6xl grid place-items-center py-16">
+              <div class="text-center">
+                <i data-lucide="file-code" class="mx-auto h-14 w-14 text-slate-400"></i>
+                <h1 class="mt-4 text-2xl font-bold text-charcoal">Coming Soon: Automated Smart Contracts</h1>
+              </div>
+            </section>
+          </section>
+
+          <section id="view-zakat" class="hidden">
+            <section class="mx-auto max-w-6xl grid place-items-center py-16">
+              <div class="text-center">
+                <i data-lucide="calculator" class="mx-auto h-14 w-14 text-slate-400"></i>
+                <h1 class="mt-4 text-2xl font-bold text-charcoal">Zakat Calculator & Audit</h1>
+                <p class="mt-2 text-sm text-slate-500">Coming soon: calculation tools and distribution ledger.</p>
+              </div>
+            </section>
+          </section>
+
+          <section id="view-settings" class="hidden">
+            <section class="mx-auto max-w-6xl">
+              <h1 class="text-2xl font-bold text-charcoal">Account Settings</h1>
+            </section>
+
+            <section class="mx-auto max-w-6xl mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="text-base font-semibold text-charcoal">Profile</div>
+                <div class="mt-4 space-y-4">
+                  <div>
+                    <label class="text-sm font-semibold text-charcoal" for="settingsName">Full Name</label>
+                    <input id="settingsName" type="text" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15" placeholder="Your Name" />
+                  </div>
+                  <div>
+                    <label class="text-sm font-semibold text-charcoal" for="settingsEmail">Email</label>
+                    <input id="settingsEmail" type="email" readonly class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-charcoal shadow-sm" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="text-base font-semibold text-charcoal">Security</div>
+                <div class="mt-4 space-y-4">
+                  <div>
+                    <label class="text-sm font-semibold text-charcoal" for="settingsCurrentPassword">Current Password</label>
+                    <input id="settingsCurrentPassword" type="password" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15" placeholder="••••••••" />
+                  </div>
+                  <div>
+                    <label class="text-sm font-semibold text-charcoal" for="settingsNewPassword">New Password</label>
+                    <input id="settingsNewPassword" type="password" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15" placeholder="••••••••" />
+                  </div>
+                  <div>
+                    <button id="settingsUpdatePassword" class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-4 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95">
+                      <i data-lucide="key-round" class="h-4 w-4"></i>
+                      Update Password
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="mx-auto max-w-6xl mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div class="text-base font-semibold text-charcoal">Preferences</div>
+              <div class="mt-4">
+                <label class="inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="prefEmails" class="sr-only peer" />
+                  <div class="relative h-6 w-10 rounded-full bg-slate-300 transition peer-checked:bg-emerald-600">
+                    <span class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition peer-checked:translate-x-4"></span>
+                  </div>
+                  <span class="ml-3 text-sm text-charcoal">Email Notifications</span>
+                </label>
+              </div>
+            </section>
+          </section>
+        </main>
+      </div>
     </div>
 
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
       window.addEventListener("load", () => {
         if (window.lucide) window.lucide.createIcons();
+        const welcomeEmail = document.getElementById("welcomeEmail");
+        const verificationBanner = document.getElementById("verificationBanner");
+        const resendVerification = document.getElementById("resendVerification");
+        const views = {
+          dashboard: document.getElementById("view-dashboard"),
+          wallet: document.getElementById("view-wallet"),
+          sukuk: document.getElementById("view-sukuk"),
+          zakat: document.getElementById("view-zakat"),
+          contracts: document.getElementById("view-contracts"),
+          settings: document.getElementById("view-settings"),
+        };
+        const sidebarLinks = Array.from(document.querySelectorAll("aside nav a[data-view]"));
 
-        const authButton = document.getElementById("authButton");
-        const authEmail = document.getElementById("authEmail");
-
-        const setSignedOutUI = () => {
-          if (!authButton) return;
-          if (authEmail) {
-            authEmail.textContent = "";
-            authEmail.classList.add("hidden");
-          }
-          authButton.classList.remove("hidden");
-          authButton.textContent = "Sign In";
-          authButton.setAttribute("href", "./index.html#login");
+        const setActiveView = (name) => {
+          Object.entries(views).forEach(([key, el]) => {
+            if (!el) return;
+            if (key === name) el.classList.remove("hidden");
+            else el.classList.add("hidden");
+          });
+          sidebarLinks.forEach((link) => {
+            const isActive = link.dataset.view === name;
+            link.classList.toggle("bg-slate-800", isActive);
+            link.classList.toggle("text-white", isActive);
+          });
         };
 
-        const setSignedInUI = (user) => {
-          if (!authButton) return;
-          if (authEmail) {
-            authEmail.textContent = user?.email ?? "";
-            authEmail.classList.remove("hidden");
-          }
-          authButton.classList.remove("hidden");
-          authButton.textContent = "Dashboard";
-          authButton.setAttribute("href", "./platform.html");
-        };
+        sidebarLinks.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const name = link.dataset.view;
+            if (!name) return;
+            setActiveView(name);
+            try {
+              history.replaceState(null, "", `#${name}`);
+            } catch (_) {}
+          });
+        });
+
+        const sidebarLogo = document.getElementById("sidebarLogo");
+        if (sidebarLogo) {
+          sidebarLogo.addEventListener("click", () => {
+            setActiveView("dashboard");
+            try {
+              history.replaceState(null, "", `#dashboard`);
+            } catch (_) {}
+          });
+        }
+
+        const initialHash = (window.location.hash || "").replace("#", "");
+        if (initialHash && views[initialHash]) setActiveView(initialHash);
+        else setActiveView("dashboard");
 
         if (window.firebase && firebase.auth) {
           firebase.auth().onAuthStateChanged((user) => {
-            if (user) setSignedInUI(user);
-            else setSignedOutUI();
+            if (welcomeEmail) welcomeEmail.textContent = user?.email ?? "";
+            if (user && !user.emailVerified) {
+              verificationBanner?.classList.remove("hidden");
+              if (resendVerification) {
+                resendVerification.addEventListener("click", async () => {
+                  try {
+                    const currentUser = firebase.auth().currentUser ?? user;
+                    await currentUser.sendEmailVerification();
+                  } catch (_) {}
+                });
+              }
+            } else {
+              verificationBanner?.classList.add("hidden");
+            }
           });
-        } else {
-          setSignedOutUI();
         }
       });
     </script>
