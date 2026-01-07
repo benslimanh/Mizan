@@ -1,165 +1,115 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Whitepaper — Mizan Protocol</title>
-    <link rel="icon" href="./logo.ico" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whitepaper | Mizan Protocol</title>
     <style>
-      :root {
-        --bg: #F3F4F6;        /* light gray background */
-        --text: #111827;      /* charcoal */
-        --muted: #6B7280;     /* slate */
-        --border: #E5E7EB;    /* soft border */
-        --shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
-        --ghost-hover: #F9FAFB;
-        --brand: #3E1BDB;     /* accent for download */
-      }
+        /* تنسيقات احترافية مدمجة لضمان عملها فوراً */
+        :root {
+            --primary: #3E1BDB; /* لون ستيلر */
+            --bg: #F9FAFB;
+            --text: #111827;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-      * { box-sizing: border-box; }
-      html, body { height: 100%; }
-      body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-        font-family: Inter, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
+        /* الهيدر الأنيق */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
 
-      /* Header */
-      .header {
-        position: fixed;
-        top: 0; left: 0; right: 0;
-        background: #fff;
-        border-bottom: 1px solid var(--border);
-        z-index: 50;
-      }
-      .nav {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 12px 16px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        color: var(--text);
-      }
-      .brand img { height: 40px; width: auto; display: block; }
-      .brand-name { font-weight: 600; font-size: 14px; letter-spacing: 0.02em; }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #000;
+            text-decoration: none;
+        }
 
-      .ghost-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 14px;
-        border: 1px solid var(--border);
-        background: transparent;
-        color: var(--text);
-        border-radius: 10px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 14px;
-      }
-      .ghost-btn:hover { background: var(--ghost-hover); }
+        .brand img {
+            height: 32px; /* تصغير اللوجو */
+            width: auto;
+        }
 
-      /* Main */
-      .main { padding: 96px 16px 24px; }
-      .container { max-width: 1200px; margin: 0 auto; }
-      .viewer-card {
-        background: #fff;
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        box-shadow: var(--shadow);
-        overflow: hidden;
-      }
-      .viewer-card iframe {
-        width: 100%;
-        height: 85vh;
-        border: 0;
-        display: block;
-      }
+        .btn-back {
+            text-decoration: none;
+            color: #4b5563;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .btn-back:hover {
+            background-color: #f3f4f6;
+            color: #000;
+        }
 
-      .actions {
-        margin-top: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-      }
-      .hint { color: var(--muted); font-size: 14px; }
-      .download-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 18px;
-        background: var(--brand);
-        color: #fff;
-        border-radius: 10px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 14px;
-        box-shadow: 0 6px 18px rgba(62, 27, 219, 0.25);
-      }
-      .download-btn:hover { filter: brightness(1.05); }
+        /* حاوية الـ PDF */
+        .viewer-container {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-      /* Footer */
-      .footer {
-        border-top: 1px solid var(--border);
-        background: #fff;
-        margin-top: 24px;
-      }
-      .footer-inner {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 18px 16px;
-        text-align: center;
-        color: var(--muted);
-        font-size: 14px;
-      }
+        .pdf-frame {
+            width: 100%;
+            max-width: 1000px;
+            height: 100%;
+            min-height: 80vh;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            background: white;
+        }
 
-      @media (max-width: 640px) {
-        .actions { flex-direction: column; align-items: stretch; }
-        .ghost-btn, .download-btn { width: 100%; justify-content: center; }
-      }
+        .fallback-link {
+            margin-top: 1rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
     </style>
-  </head>
-  <body>
-    <!-- Header -->
-    <header class="header">
-      <nav class="nav">
-        <a class="brand" href="#" aria-label="Mizan Protocol">
-          <img src="./logo.ico" alt="Mizan Protocol Logo" />
-          <span class="brand-name">Mizan Protocol</span>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="brand">
+            <img src="assets/images/logo.png" alt="Mizan Logo" onerror="this.style.display='none'">
+            <span>Mizan Protocol</span>
         </a>
-        <a class="ghost-btn" href="./index.html">Back to Home</a>
-      </nav>
+        <a href="index.html" class="btn-back">← Back to Home</a>
     </header>
 
-    <!-- Main: PDF Viewer -->
-    <main class="main">
-      <div class="container">
-        <section class="viewer-card">
-          <!-- Crucial: point explicitly to whitepaper.pdf, not homepage -->
-          <iframe src="/whitepaper.pdf" title="Mizan Protocol Whitepaper" loading="eager"></iframe>
-        </section>
+    <div class="viewer-container">
+        <iframe class="pdf-frame" src="mizan_whitepaper.pdf" type="application/pdf">
+            <p>Your browser implies that you don't have a PDF plugin for this browser. 
+            You can <a href="mizan_whitepaper.pdf">click here to download the PDF file.</a></p>
+        </iframe>
+        
+        <a href="mizan_whitepaper.pdf" class="fallback-link" download>Download PDF</a>
+    </div>
 
-        <div class="actions">
-          <div class="hint">If the preview does not load, use the download button.</div>
-          <!-- Reliable fallback uses the existing file name in the repo -->
-          <a class="download-btn" href="./mizan_whitepaper.pdf" download>Download PDF</a>
-        </div>
-      </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-inner">© 2025 Mizan Protocol</div>
-    </footer>
-  </body>
-  </html>
+</body>
+</html>
