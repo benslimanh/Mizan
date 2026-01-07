@@ -299,33 +299,15 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
           </div>
 
           <div class="relative">
-            <div
-              class="abstract-illustration relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-soft"
-            >
-              <div class="absolute inset-0 bg-gradient-to-tr from-white via-white/60 to-brand-orange/10"></div>
-
-              <div class="absolute left-6 top-6 h-12 w-44 rounded-2xl bg-white/80 shadow-sm ring-1 ring-slate-200/70 backdrop-blur">
-                <div class="flex h-full items-center gap-3 px-4">
-                  <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
-                    <i data-lucide="line-chart" class="h-4 w-4 text-brand-orange"></i>
-                  </span>
-                  <div class="text-xs font-semibold text-charcoal">Sukuk Insights</div>
-                </div>
-              </div>
-
-              <div class="absolute bottom-6 right-6 h-14 w-44 rounded-2xl bg-white/80 shadow-sm ring-1 ring-slate-200/70 backdrop-blur">
-                <div class="flex h-full items-center gap-3 px-4">
-                  <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
-                    <i data-lucide="shield-check" class="h-4 w-4 text-brand-orange"></i>
-                  </span>
-                  <div class="text-xs font-semibold text-charcoal">AAOIFI On-chain</div>
-                </div>
-              </div>
+            <div class="w-full overflow-hidden rounded-xl border border-slate-200 bg-white"
+                 style="box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); transform: perspective(1000px) rotateY(-5deg);">
+              <img
+                src="assets/images/app-demo.png"
+                onerror="this.src='./demo-app.png'"
+                alt="Mizan Protocol Product Interface"
+                class="block w-full h-auto max-w-full"
+              />
             </div>
-
-            <div
-              class="pointer-events-none absolute -inset-2 -z-10 rounded-[2rem] bg-gradient-to-tr from-brand-orange/15 via-transparent to-slate-200/60 blur-2xl"
-            ></div>
           </div>
         </section>
 
