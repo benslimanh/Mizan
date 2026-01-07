@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mizan Protocol — Whitepaper</title>
     <link rel="icon" href="./logo.ico" />
+    <!-- Use the same site stylesheet -->
     <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .whitepaper-container { max-width: 1000px; margin: 0 auto; padding: 1.5rem; }
+      .pdf-frame { width: 100%; height: 85vh; border: 1px solid #e2e8f0; border-radius: 1rem; box-shadow: 0 10px 30px rgba(2,8,23,0.08); }
+      .site-footer { border-top: 1px solid #e2e8f0; }
+    </style>
   </head>
   <body class="min-h-dvh bg-slate-50 text-charcoal">
-    <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur">
+    <!-- Header Nav -->
+    <header class="sticky top-0 z-20 border-b border-slate-200 bg-white">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
         <div class="flex items-center gap-2">
           <img src="./logo.ico" alt="Mizan Protocol" class="h-8 w-8" />
@@ -21,32 +28,52 @@
       </div>
     </header>
 
-    <main class="mx-auto max-w-6xl px-4 py-6">
-      <section class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
-        <iframe
-          title="Mizan Protocol Whitepaper"
-          src="./Mizan_Trust_WhitePaper.pdf"
-          class="h-[70vh] w-full"
-        ></iframe>
+    <!-- Main: PDF Viewer -->
+    <main class="whitepaper-container">
+      <section class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <iframe id="whitepaperFrame" title="Mizan Protocol Whitepaper" src="whitepaper.pdf" class="pdf-frame"></iframe>
       </section>
 
+      <!-- Fallback download CTA -->
       <div class="mt-4 flex items-center justify-between gap-3">
-        <div class="text-sm text-slate-500">Read the whitepaper in the viewer above or download a copy.</div>
-        <a
-          href="./Mizan_Trust_WhitePaper.pdf"
-          download
-          class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
-        >
+        <div class="text-sm text-slate-500">If the preview does not load, download the PDF below.</div>
+        <a id="downloadPdfButton" href="whitepaper.pdf" download class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95">
           <i data-lucide="download" class="h-4 w-4"></i>
           Download PDF
         </a>
       </div>
     </main>
 
+    <!-- Footer -->
+    <footer class="site-footer bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-6 text-center text-sm text-slate-500">© 2025 Mizan Protocol</div>
+    </footer>
+
     <script>
-      // Initialize icons if Lucide is present on the page
+      // Initialize icons if Lucide is present
       try { if (window.lucide && typeof window.lucide.createIcons === 'function') { window.lucide.createIcons(); } } catch (_) {}
+
+      // Robustly resolve available PDF path on the server
+      (async () => {
+        const frame = document.getElementById('whitepaperFrame');
+        const download = document.getElementById('downloadPdfButton');
+        const candidates = [
+          'whitepaper.pdf',
+          'Mizan_Trust_WhitePaper.pdf',
+          'Mizan_Trust_WhitePaper (2).pdf'
+        ];
+
+        for (const path of candidates) {
+          try {
+            const res = await fetch(path, { method: 'HEAD' });
+            if (res.ok) {
+              frame.src = path;
+              download.href = path;
+              break;
+            }
+          } catch (_) { /* ignore and try next */ }
+        }
+      })();
     </script>
   </body>
   </html>
-
