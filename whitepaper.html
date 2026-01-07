@@ -1,79 +1,120 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mizan Protocol — Whitepaper</title>
-    <link rel="icon" href="./logo.ico" />
-    <!-- Use the same site stylesheet -->
-    <link rel="stylesheet" href="./styles.css" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whitepaper - Mizan Protocol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
-      .whitepaper-container { max-width: 1000px; margin: 0 auto; padding: 1.5rem; }
-      .pdf-frame { width: 100%; height: 85vh; border: 1px solid #e2e8f0; border-radius: 1rem; box-shadow: 0 10px 30px rgba(2,8,23,0.08); }
-      .site-footer { border-top: 1px solid #e2e8f0; }
+        /* تنسيقات خاصة بهذه الصفحة فقط */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+
+        /* الهيدر العلوي */
+        .wp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #111827;
+        }
+        
+        /* تصغير اللوجو ليظهر بشكل أنيق */
+        .brand img {
+            height: 40px; 
+            width: auto;
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+        }
+        .btn-back:hover {
+            color: #3E1BDB; /* Stellar Purple */
+        }
+
+        /* حاوية ملف الـ PDF */
+        .pdf-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            height: 85vh; /* ارتفاع يملأ الشاشة */
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .mobile-download {
+            display: none; /* مخفي في الشاشات الكبيرة */
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .pdf-container { height: 60vh; }
+            .mobile-download { display: block; }
+        }
     </style>
-  </head>
-  <body class="min-h-dvh bg-slate-50 text-charcoal">
-    <!-- Header Nav -->
-    <header class="sticky top-0 z-20 border-b border-slate-200 bg-white">
-      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <div class="flex items-center gap-2">
-          <img src="./logo.ico" alt="Mizan Protocol" class="h-8 w-8" />
-          <span class="text-sm font-semibold tracking-wide">Mizan Protocol</span>
+</head>
+<body>
+
+    <header class="wp-header">
+        <div class="brand">
+            <img src="assets/images/logo.png" alt="Mizan Logo" onerror="this.style.display='none'"> 
+            <span>Mizan Protocol</span>
         </div>
-        <a href="./index.html" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50">
-          <i data-lucide="arrow-left" class="h-4 w-4 text-brand-orange"></i>
-          Back to Home
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Home
         </a>
-      </div>
     </header>
 
-    <!-- Main: PDF Viewer -->
-    <main class="whitepaper-container">
-      <section class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-        <iframe id="whitepaperFrame" title="Mizan Protocol Whitepaper" src="whitepaper.pdf" class="pdf-frame"></iframe>
-      </section>
+    <main>
+        <div class="pdf-container">
+            <iframe src="./mizan_whitepaper.pdf" title="Mizan Whitepaper">
+                <p>Your browser does not support PDFs. 
+                <a href="./mizan_whitepaper.pdf">Download the PDF</a>.</p>
+            </iframe>
+        </div>
 
-      <!-- Fallback download CTA -->
-      <div class="mt-4 flex items-center justify-between gap-3">
-        <div class="text-sm text-slate-500">If the preview does not load, download the PDF below.</div>
-        <a id="downloadPdfButton" href="whitepaper.pdf" download class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95">
-          <i data-lucide="download" class="h-4 w-4"></i>
-          Download PDF
-        </a>
-      </div>
+        <div class="mobile-download">
+            <p>Reading on mobile?</p>
+            <a href="./mizan_whitepaper.pdf" style="background:#3E1BDB; color:white; padding:10px 20px; text-decoration:none; border-radius:6px;">Download PDF</a>
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="site-footer bg-white">
-      <div class="mx-auto max-w-6xl px-4 py-6 text-center text-sm text-slate-500">© 2025 Mizan Protocol</div>
-    </footer>
-
-    <script>
-      // Initialize icons if Lucide is present
-      try { if (window.lucide && typeof window.lucide.createIcons === 'function') { window.lucide.createIcons(); } } catch (_) {}
-
-      // Robustly resolve available PDF path on the server
-      (async () => {
-        const frame = document.getElementById('whitepaperFrame');
-        const download = document.getElementById('downloadPdfButton');
-        const candidates = [
-          'whitepaper.pdf',
-          'Mizan_Trust_WhitePaper.pdf',
-          'Mizan_Trust_WhitePaper (2).pdf'
-        ];
-
-        for (const path of candidates) {
-          try {
-            const res = await fetch(path, { method: 'HEAD' });
-            if (res.ok) {
-              frame.src = path;
-              download.href = path;
-              break;
-            }
-          } catch (_) { /* ignore and try next */ }
-        }
-      })();
-    </script>
-  </body>
-  </html>
+</body>
+</html>
