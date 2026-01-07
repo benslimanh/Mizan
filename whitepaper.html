@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mizan Protocol — Whitepaper</title>
+    <link rel="icon" href="./logo.ico" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="min-h-dvh bg-slate-50 text-charcoal">
+    <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+        <div class="flex items-center gap-2">
+          <img src="./logo.ico" alt="Mizan Protocol" class="h-8 w-8" />
+          <span class="text-sm font-semibold tracking-wide">Mizan Protocol</span>
+        </div>
+        <a href="./index.html" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50">
+          <i data-lucide="arrow-left" class="h-4 w-4 text-brand-orange"></i>
+          Back to Home
+        </a>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-6">
+      <section class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+        <iframe
+          title="Mizan Protocol Whitepaper"
+          src="./Mizan_Trust_WhitePaper.pdf"
+          class="h-[70vh] w-full"
+        ></iframe>
+      </section>
+
+      <div class="mt-4 flex items-center justify-between gap-3">
+        <div class="text-sm text-slate-500">Read the whitepaper in the viewer above or download a copy.</div>
+        <a
+          href="./Mizan_Trust_WhitePaper.pdf"
+          download
+          class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
+        >
+          <i data-lucide="download" class="h-4 w-4"></i>
+          Download PDF
+        </a>
+      </div>
+    </main>
+
+    <script>
+      // Initialize icons if Lucide is present on the page
+      try { if (window.lucide && typeof window.lucide.createIcons === 'function') { window.lucide.createIcons(); } } catch (_) {}
+    </script>
+  </body>
+  </html>
+
