@@ -2,36 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base layout and typography fixes */
-html {
-  font-size: 18px;
-}
-
-body {
-  background-color: #FAF9F6;
-  color: #1A1A1A;
-}
-
-/* Main container constraints */
-.container,
-[class*="max-w-"] {
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Scale up base spacing */
+/* Legasi Theme Base Layer - Force zoom and colors */
 @layer base {
+  html {
+    font-size: 18px;     /* Increase base size from 16px */
+    zoom: 1.15;          /* Force 115% zoom simulation */
+    background-color: #FAF9F6;
+    color: #1A1A1A;
+  }
+  
+  body {
+    @apply bg-background text-text-main;
+  }
+  
+  /* Scale up base spacing for better readability */
   section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    @apply py-16;
   }
   
   @media (min-width: 768px) {
     section {
-      padding-top: 6rem;
-      padding-bottom: 6rem;
+      @apply py-24;
     }
+  }
+  
+  /* Main container constraints */
+  .container,
+  [class*="max-w-"] {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
