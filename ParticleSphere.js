@@ -1,7 +1,7 @@
 /**
  * ParticleSphere.js
- * 3D Interactive Particle Sphere with Plexus Effect
- * Blockchain-inspired network visualization
+ * Premium 3D Interactive Particle Sphere with Plexus Effect
+ * Blockchain-inspired network visualization with two-layer depth system
  */
 
 class ParticleSphere {
@@ -15,16 +15,21 @@ class ParticleSphere {
     this.scene = null;
     this.camera = null;
     this.renderer = null;
-    this.particles = null;
-    this.particleSystem = null;
+    this.coreParticles = null;
+    this.accentParticles = null;
     this.lines = null;
-    this.particlePositions = [];
-    this.particleVelocities = [];
-    this.particleCount = 800;
-    this.maxConnections = 20;
-    this.maxDistance = 80;
-    this.primaryColor = 0xe85d3f; // #E85D3F
+    this.corePositions = [];
+    this.coreVelocities = [];
+    this.accentPositions = [];
+    this.accentVelocities = [];
+    this.coreCount = 600;
+    this.accentCount = 200;
+    this.maxConnections = 15;
+    this.maxDistance = 85;
+    this.brandOrange = 0xe85d3f; // #E85D3F - Core particles
+    this.deepAmber = 0xb7791f; // #B7791F - Accent particles
     this.lineColor = 0xe85d3f;
+    this.floatOffset = 0;
 
     this.init();
     this.animate();
@@ -35,13 +40,13 @@ class ParticleSphere {
     // Scene
     this.scene = new THREE.Scene();
 
-    // Camera - positioned closer for better visibility
+    // Camera - zoomed out for full sphere visibility
     const width = this.container.offsetWidth;
     const height = this.container.offsetHeight;
-    this.camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
-    this.camera.position.set(0, 0, 250);
+    this.camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);
+    this.camera.position.set(0, 0, 320);
 
-    // Renderer
+    // Renderer with premium settings
     this.renderer = new THREE.WebGLRenderer({ 
       antialias: true, 
       alpha: true 
@@ -54,8 +59,9 @@ class ParticleSphere {
     this.renderer.domElement.style.display = 'block';
     this.container.appendChild(this.renderer.domElement);
 
-    // Create particles in sphere formation
-    this.createParticleSphere();
+    // Create two-layer particle system
+    this.createCoreParticles();
+    this.createAccentParticles();
 
     // Create plexus lines
     this.createPlexusLines();
@@ -64,40 +70,39 @@ class ParticleSphere {
     window.addEventListener('resize', () => this.handleResize());
   }
 
-  createParticleSphere() {
+  createCoreParticles() {
     const geometry = new THREE.BufferGeometry();
     const positions = [];
     const colors = [];
-    const radius = 150;
+    const radius = 140;
 
-    // Generate particles on sphere surface with some randomness
-    for (let i = 0; i < this.particleCount; i++) {
-      // Fibonacci sphere distribution for even spacing
-      const phi = Math.acos(-1 + (2 * i) / this.particleCount);
-      const theta = Math.sqrt(this.particleCount * Math.PI) * phi;
+    // Generate core particles - denser, smaller, brand orange
+    for (let i = 0; i < this.coreCount; i++) {
+      // Fibonacci sphere distribution
+      const phi = Math.acos(-1 + (2 * i) / this.coreCount);
+      const theta = Math.sqrt(this.coreCount * Math.PI) * phi;
 
-      // Add some randomness to create depth
-      const r = radius + (Math.random() - 0.5) * 30;
+      const r = radius + (Math.random() - 0.5) * 25;
 
       const x = r * Math.cos(theta) * Math.sin(phi);
       const y = r * Math.sin(theta) * Math.sin(phi);
       const z = r * Math.cos(phi);
 
       positions.push(x, y, z);
-      this.particlePositions.push(new THREE.Vector3(x, y, z));
+      this.corePositions.push(new THREE.Vector3(x, y, z));
 
-      // Small random velocity for subtle floating effect
-      this.particleVelocities.push(
+      // Small random velocity
+      this.coreVelocities.push(
         new THREE.Vector3(
-          (Math.random() - 0.5) * 0.1,
-          (Math.random() - 0.5) * 0.1,
-          (Math.random() - 0.5) * 0.1
+          (Math.random() - 0.5) * 0.08,
+          (Math.random() - 0.5) * 0.08,
+          (Math.random() - 0.5) * 0.08
         )
       );
 
-      // Color with slight variation
-      const color = new THREE.Color(this.primaryColor);
-      const brightness = 0.7 + Math.random() * 0.3;
+      // Brand orange with variation
+      const color = new THREE.Color(this.brandOrange);
+      const brightness = 0.8 + Math.random() * 0.2;
       color.multiplyScalar(brightness);
       colors.push(color.r, color.g, color.b);
     }
@@ -106,20 +111,73 @@ class ParticleSphere {
     geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 4,
+      size: 3.5,
       vertexColors: true,
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.8,
       sizeAttenuation: true
     });
 
-    this.particleSystem = new THREE.Points(geometry, material);
-    this.scene.add(this.particleSystem);
+    this.coreParticles = new THREE.Points(geometry, material);
+    this.scene.add(this.coreParticles);
+  }
+
+  createAccentParticles() {
+    const geometry = new THREE.BufferGeometry();
+    const positions = [];
+    const colors = [];
+    const radius = 145;
+
+    // Generate accent particles - sparser, larger, deep amber/gold
+    for (let i = 0; i < this.accentCount; i++) {
+      // Fibonacci sphere distribution
+      const phi = Math.acos(-1 + (2 * i) / this.accentCount);
+      const theta = Math.sqrt(this.accentCount * Math.PI) * phi;
+
+      const r = radius + (Math.random() - 0.5) * 30;
+
+      const x = r * Math.cos(theta) * Math.sin(phi);
+      const y = r * Math.sin(theta) * Math.sin(phi);
+      const z = r * Math.cos(phi);
+
+      positions.push(x, y, z);
+      this.accentPositions.push(new THREE.Vector3(x, y, z));
+
+      // Slightly different velocity for layered effect
+      this.accentVelocities.push(
+        new THREE.Vector3(
+          (Math.random() - 0.5) * 0.1,
+          (Math.random() - 0.5) * 0.1,
+          (Math.random() - 0.5) * 0.1
+        )
+      );
+
+      // Deep amber/gold with variation
+      const color = new THREE.Color(this.deepAmber);
+      const brightness = 0.85 + Math.random() * 0.15;
+      color.multiplyScalar(brightness);
+      colors.push(color.r, color.g, color.b);
+    }
+
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+      size: 5,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.85,
+      sizeAttenuation: true
+    });
+
+    this.accentParticles = new THREE.Points(geometry, material);
+    this.scene.add(this.accentParticles);
   }
 
   createPlexusLines() {
-    const positions = new Float32Array(this.particleCount * this.maxConnections * 3);
-    const colors = new Float32Array(this.particleCount * this.maxConnections * 3);
+    const totalParticles = this.coreCount + this.accentCount;
+    const positions = new Float32Array(totalParticles * this.maxConnections * 3);
+    const colors = new Float32Array(totalParticles * this.maxConnections * 3);
 
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3).setUsage(THREE.DynamicDrawUsage));
@@ -128,7 +186,7 @@ class ParticleSphere {
     const material = new THREE.LineBasicMaterial({
       vertexColors: true,
       transparent: true,
-      opacity: 0.3,
+      opacity: 0.25,
       blending: THREE.AdditiveBlending
     });
 
@@ -141,25 +199,28 @@ class ParticleSphere {
     const colors = this.lines.geometry.attributes.color.array;
     const lineColor = new THREE.Color(this.lineColor);
 
+    // Combine all particles for connection calculation
+    const allPositions = [...this.corePositions, ...this.accentPositions];
+
     let vertexpos = 0;
     let colorpos = 0;
     let numConnected = 0;
 
     // Find nearby particles and draw lines
-    for (let i = 0; i < this.particleCount; i++) {
+    for (let i = 0; i < allPositions.length; i++) {
       let connectionCount = 0;
 
-      for (let j = i + 1; j < this.particleCount; j++) {
-        const dist = this.particlePositions[i].distanceTo(this.particlePositions[j]);
+      for (let j = i + 1; j < allPositions.length; j++) {
+        const dist = allPositions[i].distanceTo(allPositions[j]);
 
         if (dist < this.maxDistance && connectionCount < this.maxConnections) {
-          positions[vertexpos++] = this.particlePositions[i].x;
-          positions[vertexpos++] = this.particlePositions[i].y;
-          positions[vertexpos++] = this.particlePositions[i].z;
+          positions[vertexpos++] = allPositions[i].x;
+          positions[vertexpos++] = allPositions[i].y;
+          positions[vertexpos++] = allPositions[i].z;
 
-          positions[vertexpos++] = this.particlePositions[j].x;
-          positions[vertexpos++] = this.particlePositions[j].y;
-          positions[vertexpos++] = this.particlePositions[j].z;
+          positions[vertexpos++] = allPositions[j].x;
+          positions[vertexpos++] = allPositions[j].y;
+          positions[vertexpos++] = allPositions[j].z;
 
           // Line opacity based on distance
           const alpha = 1.0 - dist / this.maxDistance;
@@ -184,39 +245,69 @@ class ParticleSphere {
   }
 
   updateParticles() {
-    const positions = this.particleSystem.geometry.attributes.position.array;
-    const radius = 150;
+    // Update core particles
+    const corePositions = this.coreParticles.geometry.attributes.position.array;
+    const coreRadius = 140;
 
-    for (let i = 0; i < this.particleCount; i++) {
-      // Subtle floating motion
-      this.particlePositions[i].add(this.particleVelocities[i]);
+    for (let i = 0; i < this.coreCount; i++) {
+      this.corePositions[i].add(this.coreVelocities[i]);
 
-      // Keep particles roughly on sphere surface
-      const distance = this.particlePositions[i].length();
-      if (distance > radius + 20 || distance < radius - 20) {
-        this.particlePositions[i].normalize().multiplyScalar(radius + (Math.random() - 0.5) * 10);
+      const distance = this.corePositions[i].length();
+      if (distance > coreRadius + 15 || distance < coreRadius - 15) {
+        this.corePositions[i].normalize().multiplyScalar(coreRadius + (Math.random() - 0.5) * 8);
       }
 
-      positions[i * 3] = this.particlePositions[i].x;
-      positions[i * 3 + 1] = this.particlePositions[i].y;
-      positions[i * 3 + 2] = this.particlePositions[i].z;
+      corePositions[i * 3] = this.corePositions[i].x;
+      corePositions[i * 3 + 1] = this.corePositions[i].y;
+      corePositions[i * 3 + 2] = this.corePositions[i].z;
     }
 
-    this.particleSystem.geometry.attributes.position.needsUpdate = true;
+    this.coreParticles.geometry.attributes.position.needsUpdate = true;
+
+    // Update accent particles
+    const accentPositions = this.accentParticles.geometry.attributes.position.array;
+    const accentRadius = 145;
+
+    for (let i = 0; i < this.accentCount; i++) {
+      this.accentPositions[i].add(this.accentVelocities[i]);
+
+      const distance = this.accentPositions[i].length();
+      if (distance > accentRadius + 18 || distance < accentRadius - 18) {
+        this.accentPositions[i].normalize().multiplyScalar(accentRadius + (Math.random() - 0.5) * 10);
+      }
+
+      accentPositions[i * 3] = this.accentPositions[i].x;
+      accentPositions[i * 3 + 1] = this.accentPositions[i].y;
+      accentPositions[i * 3 + 2] = this.accentPositions[i].z;
+    }
+
+    this.accentParticles.geometry.attributes.position.needsUpdate = true;
   }
 
   animate() {
     requestAnimationFrame(() => this.animate());
 
-    // Slow rotation
-    if (this.particleSystem) {
-      this.particleSystem.rotation.y += 0.002;
-      this.particleSystem.rotation.x += 0.001;
+    // Increment float offset for gentle up/down wobble
+    this.floatOffset += 0.008;
+    const floatY = Math.sin(this.floatOffset) * 8;
+
+    // Slow rotation with float animation
+    if (this.coreParticles) {
+      this.coreParticles.rotation.y += 0.0015;
+      this.coreParticles.rotation.x += 0.0008;
+      this.coreParticles.position.y = floatY;
+    }
+
+    if (this.accentParticles) {
+      this.accentParticles.rotation.y += 0.0018;
+      this.accentParticles.rotation.x += 0.0009;
+      this.accentParticles.position.y = floatY * 1.1; // Slightly different float for depth
     }
 
     if (this.lines) {
-      this.lines.rotation.y += 0.002;
-      this.lines.rotation.x += 0.001;
+      this.lines.rotation.y += 0.0015;
+      this.lines.rotation.x += 0.0008;
+      this.lines.position.y = floatY;
     }
 
     // Update particle positions
@@ -260,7 +351,7 @@ function initParticleSphere() {
 
   const container = document.getElementById('particle-sphere-container');
   if (container) {
-    console.log('Initializing ParticleSphere...');
+    console.log('Initializing Premium ParticleSphere...');
     console.log('THREE.js version:', THREE.REVISION);
     console.log('Container dimensions:', container.offsetWidth, 'x', container.offsetHeight);
     new ParticleSphere('particle-sphere-container');
