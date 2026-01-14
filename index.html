@@ -305,14 +305,12 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
           </div>
 
           <div class="relative">
-            <div class="w-full overflow-hidden rounded-xl border border-slate-200 bg-background"
-                 style="box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); transform: perspective(1000px) rotateY(-5deg);">
-              <img
-                src="assets/images/app-demo.png"
-                onerror="this.src='./demo-app.png'"
-                alt="Mizan Protocol Product Interface"
-                class="block w-full h-auto max-w-full"
-              />
+            <div 
+              id="particle-sphere-container" 
+              class="w-full h-[500px] md:h-[600px] rounded-xl overflow-hidden"
+              style="box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);"
+            >
+              <!-- 3D Particle Sphere will be rendered here -->
             </div>
           </div>
         </section>
@@ -494,6 +492,8 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
       </footer>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+    <script src="./ParticleSphere.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
       window.addEventListener("load", () => {
