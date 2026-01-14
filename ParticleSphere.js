@@ -249,11 +249,19 @@ class ParticleSphere {
   }
 }
 
-// Auto-initialize when DOM is ready
+// Auto-initialize when DOM and THREE.js are ready
 function initParticleSphere() {
+  // Check if THREE.js is loaded
+  if (typeof THREE === 'undefined') {
+    console.warn('THREE.js not loaded yet, waiting...');
+    setTimeout(initParticleSphere, 100);
+    return;
+  }
+
   const container = document.getElementById('particle-sphere-container');
   if (container) {
     console.log('Initializing ParticleSphere...');
+    console.log('THREE.js version:', THREE.REVISION);
     console.log('Container dimensions:', container.offsetWidth, 'x', container.offsetHeight);
     new ParticleSphere('particle-sphere-container');
   } else {
@@ -261,8 +269,5 @@ function initParticleSphere() {
   }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initParticleSphere);
-} else {
-  initParticleSphere();
-}
+// Wait for both DOM and window load to ensure scripts are loaded
+window.addEventListener('load', initParticleSphere);
