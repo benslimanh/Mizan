@@ -35,11 +35,11 @@ class ParticleSphere {
     // Scene
     this.scene = new THREE.Scene();
 
-    // Camera
+    // Camera - positioned closer for better visibility
     const width = this.container.offsetWidth;
     const height = this.container.offsetHeight;
     this.camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
-    this.camera.position.z = 300;
+    this.camera.position.set(0, 0, 250);
 
     // Renderer
     this.renderer = new THREE.WebGLRenderer({ 
@@ -49,6 +49,9 @@ class ParticleSphere {
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.setClearColor(0x000000, 0); // Transparent background
+    this.renderer.domElement.style.width = '100%';
+    this.renderer.domElement.style.height = '100%';
+    this.renderer.domElement.style.display = 'block';
     this.container.appendChild(this.renderer.domElement);
 
     // Create particles in sphere formation
@@ -103,10 +106,10 @@ class ParticleSphere {
     geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 3,
+      size: 4,
       vertexColors: true,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.9,
       sizeAttenuation: true
     });
 
@@ -247,14 +250,19 @@ class ParticleSphere {
 }
 
 // Auto-initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('particle-sphere-container')) {
-      new ParticleSphere('particle-sphere-container');
-    }
-  });
-} else {
-  if (document.getElementById('particle-sphere-container')) {
+function initParticleSphere() {
+  const container = document.getElementById('particle-sphere-container');
+  if (container) {
+    console.log('Initializing ParticleSphere...');
+    console.log('Container dimensions:', container.offsetWidth, 'x', container.offsetHeight);
     new ParticleSphere('particle-sphere-container');
+  } else {
+    console.error('particle-sphere-container not found');
   }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initParticleSphere);
+} else {
+  initParticleSphere();
 }
