@@ -2,6 +2,7 @@
  * ParticleSphere.js
  * Premium 3D Interactive Particle Sphere with Plexus Effect
  * Blockchain-inspired network visualization with two-layer depth system
+ * Features: Mouse interaction, network connections, hover effects
  */
 
 class ParticleSphere {
@@ -28,10 +29,19 @@ class ParticleSphere {
     this.maxDistance = 85;
     this.brandOrange = 0xe85d3f; // #E85D3F - Core particles
     this.deepAmber = 0xb7791f; // #B7791F - Accent particles
-    this.lineColor = 0xe85d3f;
+    this.lineColor = 0xb7791f; // Gold/amber for network lines
     this.floatOffset = 0;
+    
+    // Mouse interaction properties
+    this.mouse = { x: 0, y: 0 };
+    this.targetRotation = { x: 0, y: 0 };
+    this.currentRotation = { x: 0, y: 0 };
+    this.isHovered = false;
+    this.targetScale = 1;
+    this.currentScale = 1;
 
     this.init();
+    this.setupMouseInteraction();
     this.animate();
     this.handleResize();
   }
@@ -68,6 +78,44 @@ class ParticleSphere {
 
     // Window resize handler
     window.addEventListener('resize', () => this.handleResize());
+  }
+
+  setupMouseInteraction() {
+    // Track mouse movement for interactive rotation
+    this.container.addEventListener('mousemove', (event) => {
+      const rect = this.container.getBoundingClientRect();
+      // Normalize mouse position to -1 to 1
+      this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      
+      // Calculate target rotation based on mouse position
+      this.targetRotation.y = this.mouse.x * 0.3;
+      this.targetRotation.x = this.mouse.y * 0.3;
+    });
+
+    // Hover effects
+    this.container.addEventListener('mouseenter', () => {
+      this.isHovered = true;
+      this.targetScale = 1.05;
+    });
+
+    this.container.addEventListener('mouseleave', () => {
+      this.isHovered = false;
+      this.targetScale = 1;
+      this.targetRotation.x = 0;
+      this.targetRotation.y = 0;
+    });
+
+    // Make container cursor pointer to indicate interactivity
+    this.container.style.cursor = 'grab';
+    
+    this.container.addEventListener('mousedown', () => {
+      this.container.style.cursor = 'grabbing';
+    });
+    
+    this.container.addEventListener('mouseup', () => {
+      this.container.style.cursor = 'grab';
+    });
   }
 
   createCoreParticles() {
@@ -186,8 +234,9 @@ class ParticleSphere {
     const material = new THREE.LineBasicMaterial({
       vertexColors: true,
       transparent: true,
-      opacity: 0.25,
-      blending: THREE.AdditiveBlending
+      opacity: 0.35, // Slightly more visible for network effect
+      blending: THREE.AdditiveBlending,
+      linewidth: 1
     });
 
     this.lines = new THREE.LineSegments(geometry, material);
@@ -206,7 +255,7 @@ class ParticleSphere {
     let colorpos = 0;
     let numConnected = 0;
 
-    // Find nearby particles and draw lines
+    // Find nearby particles and draw lines (optimized with distance threshold)
     for (let i = 0; i < allPositions.length; i++) {
       let connectionCount = 0;
 
@@ -222,16 +271,16 @@ class ParticleSphere {
           positions[vertexpos++] = allPositions[j].y;
           positions[vertexpos++] = allPositions[j].z;
 
-          // Line opacity based on distance
-          const alpha = 1.0 - dist / this.maxDistance;
+          // Line opacity based on distance - fades with distance
+          const alpha = (1.0 - dist / this.maxDistance) * 0.6;
           
-          colors[colorpos++] = lineColor.r;
-          colors[colorpos++] = lineColor.g;
-          colors[colorpos++] = lineColor.b;
+          colors[colorpos++] = lineColor.r * alpha;
+          colors[colorpos++] = lineColor.g * alpha;
+          colors[colorpos++] = lineColor.b * alpha;
 
-          colors[colorpos++] = lineColor.r;
-          colors[colorpos++] = lineColor.g;
-          colors[colorpos++] = lineColor.b;
+          colors[colorpos++] = lineColor.r * alpha;
+          colors[colorpos++] = lineColor.g * alpha;
+          colors[colorpos++] = lineColor.b * alpha;
 
           connectionCount++;
           numConnected++;
@@ -287,27 +336,41 @@ class ParticleSphere {
   animate() {
     requestAnimationFrame(() => this.animate());
 
+    // Smooth lerp for rotation based on mouse
+    this.currentRotation.x += (this.targetRotation.x - this.currentRotation.x) * 0.05;
+    this.currentRotation.y += (this.targetRotation.y - this.currentRotation.y) * 0.05;
+
+    // Smooth lerp for scale on hover
+    this.currentScale += (this.targetScale - this.currentScale) * 0.05;
+
     // Increment float offset for gentle up/down wobble
     this.floatOffset += 0.008;
     const floatY = Math.sin(this.floatOffset) * 8;
 
-    // Slow rotation with float animation
+    // Base rotation speed (slower when hovered)
+    const baseRotationSpeed = this.isHovered ? 0.0008 : 0.0015;
+    const baseRotationSpeedX = this.isHovered ? 0.0004 : 0.0008;
+
+    // Slow rotation with float animation + mouse interaction
     if (this.coreParticles) {
-      this.coreParticles.rotation.y += 0.0015;
-      this.coreParticles.rotation.x += 0.0008;
+      this.coreParticles.rotation.y += baseRotationSpeed + this.currentRotation.y * 0.01;
+      this.coreParticles.rotation.x += baseRotationSpeedX + this.currentRotation.x * 0.01;
       this.coreParticles.position.y = floatY;
+      this.coreParticles.scale.set(this.currentScale, this.currentScale, this.currentScale);
     }
 
     if (this.accentParticles) {
-      this.accentParticles.rotation.y += 0.0018;
-      this.accentParticles.rotation.x += 0.0009;
+      this.accentParticles.rotation.y += (baseRotationSpeed * 1.2) + this.currentRotation.y * 0.01;
+      this.accentParticles.rotation.x += (baseRotationSpeedX * 1.1) + this.currentRotation.x * 0.01;
       this.accentParticles.position.y = floatY * 1.1; // Slightly different float for depth
+      this.accentParticles.scale.set(this.currentScale, this.currentScale, this.currentScale);
     }
 
     if (this.lines) {
-      this.lines.rotation.y += 0.0015;
-      this.lines.rotation.x += 0.0008;
+      this.lines.rotation.y += baseRotationSpeed + this.currentRotation.y * 0.01;
+      this.lines.rotation.x += baseRotationSpeedX + this.currentRotation.x * 0.01;
       this.lines.position.y = floatY;
+      this.lines.scale.set(this.currentScale, this.currentScale, this.currentScale);
     }
 
     // Update particle positions
@@ -351,7 +414,7 @@ function initParticleSphere() {
 
   const container = document.getElementById('particle-sphere-container');
   if (container) {
-    console.log('Initializing Premium ParticleSphere...');
+    console.log('Initializing Premium Interactive ParticleSphere...');
     console.log('THREE.js version:', THREE.REVISION);
     console.log('Container dimensions:', container.offsetWidth, 'x', container.offsetHeight);
     new ParticleSphere('particle-sphere-container');
