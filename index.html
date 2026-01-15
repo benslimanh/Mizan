@@ -59,10 +59,10 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
     </script>
   </head>
 
-  <body class="h-full bg-background font-sans text-text-main antialiased">
+  <body class="h-full bg-cream font-sans text-text-main antialiased">
     <div
       id="intro-overlay"
-      class="intro-overlay fixed inset-0 z-50 flex items-center justify-center bg-background"
+      class="intro-overlay fixed inset-0 z-50 flex items-center justify-center bg-cream"
       aria-hidden="true"
     >
       <div class="flex flex-col items-center">
@@ -75,14 +75,14 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
 
     <div id="loginModal" class="fixed inset-0 z-50 hidden items-center justify-center px-4" aria-hidden="true">
       <div class="absolute inset-0 bg-slate-900/30 backdrop-blur-sm"></div>
-      <div class="relative w-full max-w-md rounded-3xl border border-slate-200 bg-background/80 p-6 shadow-soft backdrop-blur-md">
+      <div class="relative w-full max-w-md rounded-3xl border border-slate-200 bg-cream/80 p-6 shadow-soft backdrop-blur-md">
         <div class="flex items-start justify-between gap-4">
           <div>
             <div class="inline-flex items-center gap-2 rounded-2xl bg-slate-100 p-1 text-xs font-semibold">
               <button
                 type="button"
                 id="authModeLogin"
-                class="rounded-xl bg-background px-3 py-2 text-charcoal shadow-sm ring-1 ring-slate-200/70"
+                class="rounded-xl bg-cream px-3 py-2 text-charcoal shadow-sm ring-1 ring-slate-200/70"
               >
                 Login
               </button>
@@ -98,7 +98,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
           <button
             type="button"
             id="loginModalClose"
-            class="rounded-xl p-2 text-slate-500 hover:bg-background/60 hover:text-charcoal"
+            class="rounded-xl p-2 text-slate-500 hover:bg-cream/60 hover:text-charcoal"
           >
             <i data-lucide="x" class="h-5 w-5"></i>
           </button>
@@ -114,7 +114,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                 type="email"
                 autocomplete="email"
                 required
-                class="w-full rounded-xl border border-slate-200 bg-background/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
+                class="w-full rounded-xl border border-slate-200 bg-cream/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
                 placeholder="you@company.com"
               />
             </div>
@@ -129,7 +129,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                 type="password"
                 autocomplete="current-password"
                 required
-                class="w-full rounded-xl border border-slate-200 bg-background/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
+                class="w-full rounded-xl border border-slate-200 bg-cream/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
                 placeholder="••••••••"
               />
             </div>
@@ -143,7 +143,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                 name="confirmPassword"
                 type="password"
                 autocomplete="new-password"
-                class="w-full rounded-xl border border-slate-200 bg-background/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
+                class="w-full rounded-xl border border-slate-200 bg-cream/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
                 placeholder="••••••••"
               />
             </div>
@@ -166,7 +166,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
     <div class="min-h-full">
       <header class="sticky top-4 z-40 px-4">
         <nav
-          class="mx-auto flex w-full max-w-6xl items-center justify-between rounded-2xl border border-slate-200/70 bg-background/80 px-4 py-3 shadow-soft backdrop-blur-md"
+          class="mx-auto flex w-full max-w-6xl items-center justify-between rounded-2xl border border-slate-200/70 bg-cream/80 px-4 py-3 shadow-soft backdrop-blur-md"
         >
           <a href="./index.html" class="flex items-center gap-2">
             <img src="logo.ico" alt="Mizan Logo" class="h-8" />
@@ -202,7 +202,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
               ></button>
               <div
                 id="profileDropdown"
-                class="absolute right-0 mt-3 hidden w-80 rounded-3xl border border-slate-200 bg-background/80 p-5 shadow-soft backdrop-blur-md"
+                class="absolute right-0 mt-3 hidden w-80 rounded-3xl border border-slate-200 bg-cream/80 p-5 shadow-soft backdrop-blur-md"
               >
                 <div class="text-xs font-semibold tracking-[0.22em] text-slate-400">PROFILE</div>
                 <div id="profileEmail" class="mt-3 text-sm font-semibold text-charcoal"></div>
@@ -220,7 +220,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                   <button
                     type="button"
                     id="resendVerification"
-                    class="hidden inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-background px-4 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
+                    class="hidden inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-cream px-4 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
                   >
                     <i data-lucide="mail" class="h-4 w-4 text-brand-orange"></i>
                     Resend Verification
@@ -228,7 +228,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                   <button
                     type="button"
                     id="logoutButton"
-                    class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-background px-4 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-cream px-4 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
                   >
                     <i data-lucide="log-out" class="h-4 w-4 text-brand-orange"></i>
                     Logout
@@ -254,7 +254,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
         >
           <div>
             <p
-              class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-background px-4 py-2 text-xs font-semibold text-slate-600 shadow-sm"
+              class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-cream px-4 py-2 text-xs font-semibold text-slate-600 shadow-sm"
             >
               <span class="h-2 w-2 rounded-full bg-brand-orange"></span>
               Ethical Transparency, built for trust
@@ -282,7 +282,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
 
               <a
                 href="#features"
-                class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-background px-5 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
+                class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-cream px-5 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
               >
                 <i data-lucide="layers" class="h-4 w-4 text-brand-orange"></i>
                 Explore Features
@@ -328,7 +328,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
             <a
               id="platform"
               href="./platform.html"
-              class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-background px-4 py-2 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
+              class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-cream px-4 py-2 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
             >
               <i data-lucide="sparkles" class="h-4 w-4 text-brand-orange"></i>
               View Platform
@@ -336,7 +336,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
           </div>
 
           <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
-            <div class="rounded-2xl border border-slate-200 bg-background p-6 shadow-sm">
+            <div class="rounded-2xl border border-slate-200 bg-cream p-6 shadow-sm">
               <div class="flex items-start gap-4">
                 <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
                   <i data-lucide="hand-coins" class="h-5 w-5 text-brand-orange"></i>
@@ -350,7 +350,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
               </div>
             </div>
 
-            <div class="rounded-2xl border border-slate-200 bg-background p-6 shadow-sm">
+            <div class="rounded-2xl border border-slate-200 bg-cream p-6 shadow-sm">
               <div class="flex items-start gap-4">
                 <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
                   <i data-lucide="book-open" class="h-5 w-5 text-brand-orange"></i>
@@ -364,7 +364,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
               </div>
             </div>
 
-            <div class="rounded-2xl border border-slate-200 bg-background p-6 shadow-sm">
+            <div class="rounded-2xl border border-slate-200 bg-cream p-6 shadow-sm">
               <div class="flex items-start gap-4">
                 <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
                   <i data-lucide="handshake" class="h-5 w-5 text-brand-orange"></i>
@@ -378,7 +378,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
               </div>
             </div>
 
-            <div class="rounded-2xl border border-slate-200 bg-background p-6 shadow-sm">
+            <div class="rounded-2xl border border-slate-200 bg-cream p-6 shadow-sm">
               <div class="flex items-start gap-4">
                 <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
                   <i data-lucide="scan" class="h-5 w-5 text-brand-orange"></i>
@@ -406,7 +406,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
               </div>
             </div>
 
-            <div class="rounded-2xl border border-slate-200 bg-background p-6 shadow-sm">
+            <div class="rounded-2xl border border-slate-200 bg-cream p-6 shadow-sm">
               <div class="flex items-start gap-4">
                 <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
                   <i data-lucide="hand-heart" class="h-5 w-5 text-brand-orange"></i>
@@ -423,7 +423,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
         </section>
 
         <section id="contact" class="mx-auto max-w-6xl pb-16">
-          <div class="rounded-3xl border border-slate-200 bg-background px-6 py-10 shadow-soft md:px-10">
+          <div class="rounded-3xl border border-slate-200 bg-cream px-6 py-10 shadow-soft md:px-10">
             <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div>
                 <h2 class="text-2xl font-bold text-charcoal">Ready to build with Mizan?</h2>
@@ -570,7 +570,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
           }
 
           if (authModeLogin) {
-            authModeLogin.classList.toggle("bg-background", authMode === "login");
+            authModeLogin.classList.toggle("bg-cream", authMode === "login");
             authModeLogin.classList.toggle("text-charcoal", authMode === "login");
             authModeLogin.classList.toggle("shadow-sm", authMode === "login");
             authModeLogin.classList.toggle("ring-1", authMode === "login");
@@ -579,7 +579,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
           }
 
           if (authModeSignup) {
-            authModeSignup.classList.toggle("bg-background", authMode === "signup");
+            authModeSignup.classList.toggle("bg-cream", authMode === "signup");
             authModeSignup.classList.toggle("text-charcoal", authMode === "signup");
             authModeSignup.classList.toggle("shadow-sm", authMode === "signup");
             authModeSignup.classList.toggle("ring-1", authMode === "signup");
