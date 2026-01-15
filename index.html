@@ -21,11 +21,10 @@
         theme: {
           extend: {
             colors: {
-              primary: "#E85D3F",
-              background: "#FAF9F6",
-              "text-main": "#1A1A1A",
-              "brand-orange": "#E85D3F",
-              charcoal: "#1A1A1A",
+              primary: '#E85D3F',  /* Brand Orange */
+              secondary: '#B7791F', /* Gold/Amber */
+              background: '#FAF9F6', /* Cream */
+              charcoal: '#1A1A1A',
             },
             fontFamily: {
               sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
@@ -115,7 +114,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                 type="email"
                 autocomplete="email"
                 required
-                class="w-full rounded-xl border border-slate-200 bg-background/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
+                class="w-full rounded-xl border border-slate-200 bg-background/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-primary/15"
                 placeholder="you@company.com"
               />
             </div>
@@ -130,7 +129,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                 type="password"
                 autocomplete="current-password"
                 required
-                class="w-full rounded-xl border border-slate-200 bg-background/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
+                class="w-full rounded-xl border border-slate-200 bg-background/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-primary/15"
                 placeholder="••••••••"
               />
             </div>
@@ -144,7 +143,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                 name="confirmPassword"
                 type="password"
                 autocomplete="new-password"
-                class="w-full rounded-xl border border-slate-200 bg-background/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
+                class="w-full rounded-xl border border-slate-200 bg-background/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-primary/15"
                 placeholder="••••••••"
               />
             </div>
@@ -187,7 +186,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
           </div>
 
           <div class="flex items-center gap-2">
-            <span id="authNotice" class="hidden text-xs font-semibold text-brand-orange md:inline-flex"></span>
+            <span id="authNotice" class="hidden text-xs font-semibold text-primary md:inline-flex"></span>
             <span id="authEmail" class="hidden text-xs font-semibold text-slate-500 md:inline-flex"></span>
             <a
               id="authButton"
@@ -223,7 +222,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                     id="resendVerification"
                     class="hidden inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-background px-4 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
                   >
-                    <i data-lucide="mail" class="h-4 w-4 text-brand-orange"></i>
+                    <i data-lucide="mail" class="h-4 w-4 text-primary"></i>
                     Resend Verification
                   </button>
                   <button
@@ -231,7 +230,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                     id="logoutButton"
                     class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-background px-4 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
                   >
-                    <i data-lucide="log-out" class="h-4 w-4 text-brand-orange"></i>
+                    <i data-lucide="log-out" class="h-4 w-4 text-primary"></i>
                     Logout
                   </button>
                 </div>
@@ -239,8 +238,8 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
             </div>
             <a
               href="./contact.html"
-              class="inline-flex items-center gap-2 rounded-xl bg-brand-orange px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
-              style="background-color: #E85D3F !important;"
+              class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-primary/20 hover:bg-primary/95"
+             
             >
               <i data-lucide="arrow-right" class="h-4 w-4"></i>
               Get a Demo
@@ -274,8 +273,8 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                 href="https://mizan-1.gitbook.io/mizan/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
-                style="background-color: #E85D3F !important;"
+                class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-primary/20 hover:bg-primary/95"
+               
               >
                 <i data-lucide="file-text" class="h-4 w-4"></i>
                 Read Whitepaper
@@ -285,7 +284,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                 href="#features"
                 class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-background px-5 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
               >
-                <i data-lucide="layers" class="h-4 w-4 text-brand-orange"></i>
+                <i data-lucide="layers" class="h-4 w-4 text-primary"></i>
                 Explore Features
               </a>
             </div>
@@ -331,7 +330,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
               href="./platform.html"
               class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-background px-4 py-2 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
             >
-              <i data-lucide="sparkles" class="h-4 w-4 text-brand-orange"></i>
+              <i data-lucide="sparkles" class="h-4 w-4 text-primary"></i>
               View Platform
             </a>
           </div>
@@ -339,8 +338,8 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
           <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             <div class="rounded-2xl border border-slate-200 bg-background p-6 shadow-sm">
               <div class="flex items-start gap-4">
-                <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
-                  <i data-lucide="hand-coins" class="h-5 w-5 text-brand-orange"></i>
+                <div class="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 ring-1 ring-primary/15">
+                  <i data-lucide="hand-coins" class="h-5 w-5 text-primary"></i>
                 </div>
                 <div>
                   <h3 class="text-base font-semibold text-charcoal">Smart Contracts for Murabaha</h3>
@@ -353,8 +352,8 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
 
             <div class="rounded-2xl border border-slate-200 bg-background p-6 shadow-sm">
               <div class="flex items-start gap-4">
-                <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
-                  <i data-lucide="book-open" class="h-5 w-5 text-brand-orange"></i>
+                <div class="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 ring-1 ring-primary/15">
+                  <i data-lucide="book-open" class="h-5 w-5 text-primary"></i>
                 </div>
                 <div>
                   <h3 class="text-base font-semibold text-charcoal">Immutable Ledger (Riba-Free)</h3>
@@ -367,8 +366,8 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
 
             <div class="rounded-2xl border border-slate-200 bg-background p-6 shadow-sm">
               <div class="flex items-start gap-4">
-                <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
-                  <i data-lucide="handshake" class="h-5 w-5 text-brand-orange"></i>
+                <div class="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 ring-1 ring-primary/15">
+                  <i data-lucide="handshake" class="h-5 w-5 text-primary"></i>
                 </div>
                 <div>
                   <h3 class="text-base font-semibold text-charcoal">Musharakah Profit-Sharing</h3>
@@ -381,8 +380,8 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
 
             <div class="rounded-2xl border border-slate-200 bg-background p-6 shadow-sm">
               <div class="flex items-start gap-4">
-                <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
-                  <i data-lucide="scan" class="h-5 w-5 text-brand-orange"></i>
+                <div class="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 ring-1 ring-primary/15">
+                  <i data-lucide="scan" class="h-5 w-5 text-primary"></i>
                 </div>
                 <div>
                   <h3 class="text-base font-semibold text-charcoal">Real-time Sharia Auditing</h3>
@@ -395,8 +394,8 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
 
             <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <div class="flex items-start gap-4">
-                <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
-                  <i data-lucide="coins" class="h-5 w-5 text-brand-orange"></i>
+                <div class="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 ring-1 ring-primary/15">
+                  <i data-lucide="coins" class="h-5 w-5 text-primary"></i>
                 </div>
                 <div>
                   <h3 class="text-base font-semibold text-charcoal">Smart Contracts for Sukuk</h3>
@@ -409,8 +408,8 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
 
             <div class="rounded-2xl border border-slate-200 bg-background p-6 shadow-sm">
               <div class="flex items-start gap-4">
-                <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
-                  <i data-lucide="hand-heart" class="h-5 w-5 text-brand-orange"></i>
+                <div class="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 ring-1 ring-primary/15">
+                  <i data-lucide="hand-heart" class="h-5 w-5 text-primary"></i>
                 </div>
                 <div>
                   <h3 class="text-base font-semibold text-charcoal">Zakat Management</h3>
@@ -434,8 +433,8 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
               </div>
               <a
                 href="./contact.html"
-                class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
-                style="background-color: #E85D3F !important;"
+                class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-primary/20 hover:bg-primary/95"
+               
               >
                 <i data-lucide="mail" class="h-4 w-4"></i>
                 Contact Sales
@@ -496,7 +495,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
     </div>
 
     <script async src="https://cdn.jsdelivr.net/npm/three@0.152.0/build/three.min.js"></script>
-    <script defer src="./ParticleSphere.js?v=5"></script>
+    <script defer src="./ParticleSphere.js?v=6"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
       window.addEventListener("load", () => {
