@@ -4,13 +4,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Legasi Theme Colors
-        primary: "#E85D3F",           // Warm Orange
-        background: "#FAF9F6",        // Cream/Off-white
-        "text-main": "#1A1A1A",       // Dark Grey
-        // Legacy support (will be migrated)
-        "brand-orange": "#E85D3F",
-        charcoal: "#1A1A1A",
+        // Aegis Chain Lavender Theme
+        primary: {
+          light: '#ede9fe', // Light Lavender
+          DEFAULT: '#a78bfa', // Soft Lavender
+          dark: '#7c3aed', // Deep Violet
+        },
+        secondary: {
+          light: '#f3f0ff', // Pale Lavender
+          DEFAULT: '#c4b5fd', // Muted Violet
+          dark: '#6d28d9', // Strong Violet
+        },
+        background: {
+          DEFAULT: '#f9fafb', // Clean, ultra-light
+          glass: 'rgba(243, 240, 255, 0.7)', // Glassmorphism
+        },
+        'text-main': '#1e293b', // Slate for readability
+        accent: '#a78bfa',
+        // Remove legacy/old theme colors
       },
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact · Mizan Software</title>    <link rel="icon" type="image/x-icon" href="./logo.ico" />
+    <title>Contact · Aegis Chain</title>    <link rel="icon" type="image/x-icon" href="./logo.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,7 +15,6 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      tailwind.config = {
         theme: {
           extend: {
             colors: {
@@ -29,6 +28,37 @@
             },
             boxShadow: {
               soft: "0 12px 32px rgba(26, 26, 26, 0.08)",
+            },
+          },
+        },
+      };
+    </script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                light: '#ede9fe',
+                DEFAULT: '#a78bfa',
+                dark: '#7c3aed',
+              },
+              secondary: {
+                light: '#f3f0ff',
+                DEFAULT: '#c4b5fd',
+                dark: '#6d28d9',
+              },
+              background: {
+                DEFAULT: '#f9fafb',
+                glass: 'rgba(243, 240, 255, 0.7)',
+              },
+              'text-main': '#1e293b',
+              accent: '#a78bfa',
+            },
+            fontFamily: {
+              sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+            },
+            boxShadow: {
+              soft: "0 12px 32px rgba(124, 58, 237, 0.08)",
             },
           },
         },
@@ -52,7 +82,7 @@
     </script>
   </head>
 
-  <body class="h-full bg-white font-sans text-slate-500 antialiased">
+  <body class="h-full bg-background font-sans text-text-main antialiased">
     <div class="min-h-full">
       <header class="sticky top-4 z-40 px-4">
         <nav

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mizan Software</title>
+    <title>Aegis Chain</title>
     <link rel="icon" type="image/x-icon" href="./logo.ico" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,16 +21,28 @@
         theme: {
           extend: {
             colors: {
-              'brand-orange': '#E85D3F',
-              'deep-amber': '#B7791F',
-              'cream': '#FAF9F6',
-              'charcoal': '#1A1A1A',
+              primary: {
+                light: '#ede9fe',
+                DEFAULT: '#a78bfa',
+                dark: '#7c3aed',
+              },
+              secondary: {
+                light: '#f3f0ff',
+                DEFAULT: '#c4b5fd',
+                dark: '#6d28d9',
+              },
+              background: {
+                DEFAULT: '#f9fafb',
+                glass: 'rgba(243, 240, 255, 0.7)',
+              },
+              'text-main': '#1e293b',
+              accent: '#a78bfa',
             },
             fontFamily: {
               sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
             },
             boxShadow: {
-              soft: "0 12px 32px rgba(26, 26, 26, 0.08)",
+              soft: "0 12px 32px rgba(124, 58, 237, 0.08)",
             },
           },
         },
@@ -59,40 +71,40 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
     </script>
   </head>
 
-  <body class="h-full bg-cream font-sans text-text-main antialiased">
+  <body class="h-full bg-background font-sans text-text-main antialiased">
     <div
       id="intro-overlay"
-      class="intro-overlay fixed inset-0 z-50 flex items-center justify-center bg-cream"
+      class="intro-overlay fixed inset-0 z-50 flex items-center justify-center bg-background"
       aria-hidden="true"
     >
       <div class="flex flex-col items-center">
-        <img src="logo.ico" alt="Mizan Logo" class="intro-logo h-24 mb-6" />
-        <div class="intro-text text-xs font-semibold tracking-[0.35em] text-charcoal">
-          BLOCKCHAIN-POWERED · SHARIA-COMPLIANT
+        <i data-lucide="shield" class="intro-logo h-24 mb-6 text-primary-dark"></i>
+        <div class="intro-text text-xs font-semibold tracking-[0.35em] text-primary-dark">
+          SMART CONTRACT SECURITY · ENTERPRISE-GRADE
         </div>
       </div>
     </div>
 
     <div id="loginModal" class="fixed inset-0 z-50 hidden items-center justify-center px-4" aria-hidden="true">
       <div class="absolute inset-0 bg-slate-900/30 backdrop-blur-sm"></div>
-      <div class="relative w-full max-w-md rounded-3xl border border-slate-200 bg-cream/80 p-6 shadow-soft backdrop-blur-md">
+      <div class="relative w-full max-w-md rounded-3xl border border-secondary bg-background-glass p-6 shadow-soft backdrop-blur-md">
         <div class="flex items-start justify-between gap-4">
           <div>
             <div class="inline-flex items-center gap-2 rounded-2xl bg-slate-100 p-1 text-xs font-semibold">
               <button
                 type="button"
                 id="authModeLogin"
-                class="rounded-xl bg-cream px-3 py-2 text-charcoal shadow-sm ring-1 ring-slate-200/70"
+                class="rounded-xl bg-background px-3 py-2 text-primary-dark shadow-sm ring-1 ring-secondary"
               >
                 Login
               </button>
-              <button type="button" id="authModeSignup" class="rounded-xl px-3 py-2 text-slate-600 hover:text-charcoal">
+              <button type="button" id="authModeSignup" class="rounded-xl px-3 py-2 text-secondary-dark hover:text-primary-dark">
                 Create Account
               </button>
             </div>
-            <div id="loginModalTitle" class="mt-4 text-sm font-semibold text-charcoal">Login</div>
-            <div id="loginModalSubtitle" class="mt-1 text-xs text-slate-500">
-              Blockchain-Powered, Sharia-Compliant (AAOIFI standards).
+            <div id="loginModalTitle" class="mt-4 text-sm font-semibold text-primary-dark">Login</div>
+            <div id="loginModalSubtitle" class="mt-1 text-xs text-secondary-dark">
+              Enterprise-Grade Smart Contract Security.
             </div>
           </div>
           <button
@@ -106,7 +118,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
 
         <form id="loginForm" class="mt-6 space-y-4">
           <div>
-            <label class="text-sm font-semibold text-charcoal" for="loginEmail">Email</label>
+            <label class="text-sm font-semibold text-primary-dark" for="loginEmail">Email</label>
             <div class="mt-2">
               <input
                 id="loginEmail"
@@ -114,14 +126,14 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                 type="email"
                 autocomplete="email"
                 required
-                class="w-full rounded-xl border border-slate-200 bg-cream/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
+                class="w-full rounded-xl border border-secondary bg-background-glass px-4 py-3 text-sm text-primary-dark shadow-sm placeholder:text-secondary-dark focus:border-primary-dark focus:outline-none focus:ring-4 focus:ring-primary/15"
                 placeholder="you@company.com"
               />
             </div>
           </div>
 
           <div>
-            <label class="text-sm font-semibold text-charcoal" for="loginPassword">Password</label>
+            <label class="text-sm font-semibold text-primary-dark" for="loginPassword">Password</label>
             <div class="mt-2">
               <input
                 id="loginPassword"
@@ -129,34 +141,34 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                 type="password"
                 autocomplete="current-password"
                 required
-                class="w-full rounded-xl border border-slate-200 bg-cream/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
+                class="w-full rounded-xl border border-secondary bg-background-glass px-4 py-3 text-sm text-primary-dark shadow-sm placeholder:text-secondary-dark focus:border-primary-dark focus:outline-none focus:ring-4 focus:ring-primary/15"
                 placeholder="••••••••"
               />
             </div>
           </div>
 
           <div id="confirmPasswordRow" class="hidden">
-            <label class="text-sm font-semibold text-charcoal" for="loginPasswordConfirm">Confirm Password</label>
+            <label class="text-sm font-semibold text-primary-dark" for="loginPasswordConfirm">Confirm Password</label>
             <div class="mt-2">
               <input
                 id="loginPasswordConfirm"
                 name="confirmPassword"
                 type="password"
                 autocomplete="new-password"
-                class="w-full rounded-xl border border-slate-200 bg-cream/70 px-4 py-3 text-sm text-charcoal shadow-sm placeholder:text-slate-400 focus:border-brand-orange focus:outline-none focus:ring-4 focus:ring-brand-orange/15"
+                class="w-full rounded-xl border border-secondary bg-background-glass px-4 py-3 text-sm text-primary-dark shadow-sm placeholder:text-secondary-dark focus:border-primary-dark focus:outline-none focus:ring-4 focus:ring-primary/15"
                 placeholder="••••••••"
               />
             </div>
           </div>
 
-          <div id="loginMessage" class="text-sm font-semibold text-emerald-700" aria-live="polite"></div>
+          <div id="loginMessage" class="text-sm font-semibold text-primary-dark" aria-live="polite"></div>
           <div id="loginError" class="text-sm font-semibold text-red-600" aria-live="polite"></div>
 
           <button
             type="submit"
-            class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary-dark px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-primary/20 hover:bg-primary"
           >
-            <i data-lucide="log-in" class="h-4 w-4"></i>
+            <i data-lucide="shield" class="h-4 w-4"></i>
             <span id="loginSubmitText">Sign In</span>
           </button>
         </form>
@@ -169,52 +181,46 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
           class="mx-auto flex w-full max-w-6xl items-center justify-between rounded-2xl border border-slate-200/70 bg-cream/80 px-4 py-3 shadow-soft backdrop-blur-md"
         >
           <a href="./index.html" class="flex items-center gap-2">
-            <img src="logo.ico" alt="Mizan Logo" class="h-8" />
-            <span class="text-sm font-semibold tracking-wide text-charcoal">Mizan Software</span>
+            <i data-lucide="shield" class="h-8 text-primary-dark"></i>
+            <span class="text-sm font-semibold tracking-wide text-primary-dark">Aegis Chain</span>
           </a>
 
           <div class="hidden items-center gap-7 md:flex">
-            <a href="./features.html" class="text-sm font-medium text-slate-600 hover:text-charcoal"
-              >Features</a
-            >
-            <a href="./platform.html" class="text-sm font-medium text-slate-600 hover:text-charcoal"
-              >Platform</a
-            >
-            <a href="./contact.html" class="text-sm font-medium text-slate-600 hover:text-charcoal"
-              >Contact</a
-            >
+            <a href="./features.html" class="text-sm font-medium text-secondary-dark hover:text-primary-dark">Features</a>
+            <a href="./platform.html" class="text-sm font-medium text-secondary-dark hover:text-primary-dark">Platform</a>
+            <a href="./contact.html" class="text-sm font-medium text-secondary-dark hover:text-primary-dark">Contact</a>
           </div>
 
           <div class="flex items-center gap-2">
-            <span id="authNotice" class="hidden text-xs font-semibold text-brand-orange md:inline-flex"></span>
-            <span id="authEmail" class="hidden text-xs font-semibold text-slate-500 md:inline-flex"></span>
+            <span id="authNotice" class="hidden text-xs font-semibold text-primary-dark md:inline-flex"></span>
+            <span id="authEmail" class="hidden text-xs font-semibold text-secondary-dark md:inline-flex"></span>
             <a
               id="authButton"
               href="#login"
-              class="inline-flex rounded-xl px-4 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100"
+              class="inline-flex rounded-xl px-4 py-2 text-sm font-semibold text-primary-dark hover:bg-secondary-light"
               >Sign In</a
             >
             <div id="profileMenu" class="relative hidden">
               <button
                 type="button"
                 id="profileButton"
-                class="grid h-10 w-10 place-items-center rounded-full bg-brand-orange text-sm font-bold text-white shadow-sm shadow-brand-orange/20"
+                class="grid h-10 w-10 place-items-center rounded-full bg-primary-dark text-sm font-bold text-white shadow-sm shadow-primary/20"
               ></button>
               <div
                 id="profileDropdown"
-                class="absolute right-0 mt-3 hidden w-80 rounded-3xl border border-slate-200 bg-cream/80 p-5 shadow-soft backdrop-blur-md"
+                class="absolute right-0 mt-3 hidden w-80 rounded-3xl border border-secondary bg-background-glass p-5 shadow-soft backdrop-blur-md"
               >
-                <div class="text-xs font-semibold tracking-[0.22em] text-slate-400">PROFILE</div>
-                <div id="profileEmail" class="mt-3 text-sm font-semibold text-charcoal"></div>
-                <div id="profileSince" class="mt-1 text-xs font-semibold text-slate-500"></div>
+                <div class="text-xs font-semibold tracking-[0.22em] text-secondary-dark">PROFILE</div>
+                <div id="profileEmail" class="mt-3 text-sm font-semibold text-primary-dark"></div>
+                <div id="profileSince" class="mt-1 text-xs font-semibold text-secondary-dark"></div>
 
                 <div class="mt-5 flex flex-col gap-2">
                   <a
                     id="profileDashboard"
                     href="./platform.html"
-                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-4 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-dark px-4 py-3 text-sm font-semibold text-white shadow-sm shadow-primary/20 hover:bg-primary"
                   >
-                    <i data-lucide="layout-dashboard" class="h-4 w-4"></i>
+                    <i data-lucide="lock" class="h-4 w-4"></i>
                     Dashboard
                   </a>
                   <button
@@ -222,7 +228,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                     id="resendVerification"
                     class="hidden inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-cream px-4 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
                   >
-                    <i data-lucide="mail" class="h-4 w-4 text-brand-orange"></i>
+                    <i data-lucide="mail" class="h-4 w-4 text-primary-dark"></i>
                     Resend Verification
                   </button>
                   <button
@@ -230,7 +236,7 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
                     id="logoutButton"
                     class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-cream px-4 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
                   >
-                    <i data-lucide="log-out" class="h-4 w-4 text-brand-orange"></i>
+                    <i data-lucide="log-out" class="h-4 w-4 text-primary-dark"></i>
                     Logout
                   </button>
                 </div>
@@ -238,10 +244,10 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
             </div>
             <a
               href="./contact.html"
-              class="inline-flex items-center gap-2 rounded-xl bg-brand-orange px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
+              class="inline-flex items-center gap-2 rounded-xl bg-primary-dark px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-primary/20 hover:bg-primary"
              
             >
-              <i data-lucide="arrow-right" class="h-4 w-4"></i>
+              <i data-lucide="shield" class="h-4 w-4"></i>
               Get a Demo
             </a>
           </div>
@@ -250,57 +256,53 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
 
       <main class="px-4">
         <section
-          class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 pb-16 pt-12 md:grid-cols-2 md:pt-16 islamic-pattern rounded-3xl px-6"
+          class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 pb-16 pt-12 md:grid-cols-2 md:pt-16 rounded-3xl px-6 bg-background"
         >
           <div>
             <p
-              class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-cream px-4 py-2 text-xs font-semibold text-slate-600 shadow-sm"
+              class="inline-flex items-center gap-2 rounded-full border border-secondary bg-background px-4 py-2 text-xs font-semibold text-primary-dark shadow-sm"
             >
-              <span class="h-2 w-2 rounded-full bg-brand-orange"></span>
-              Ethical Transparency, built for trust
+              <i data-lucide="shield" class="h-4 w-4 text-primary-dark"></i>
+              Security, built for trust
             </p>
 
-            <h1 class="mt-6 text-balance text-4xl font-bold leading-tight text-charcoal md:text-5xl">
-              The Future of Islamic DeFi on Stellar.
+            <h1 class="mt-6 text-balance text-4xl font-bold leading-tight text-primary-dark md:text-5xl">
+              The Future of Smart Contract Security.
             </h1>
 
-            <p class="mt-5 max-w-xl text-pretty text-base leading-relaxed text-slate-500">
-              Mizan Protocol automates Sharia-compliant financing using Soroban Smart Contracts. We replace complex banking intermediaries with transparent, immutable code on the Stellar Network—making Murabaha transactions instant, trustless, and interest-free.
+            <p class="mt-5 max-w-xl text-pretty text-base leading-relaxed text-secondary-dark">
+              Aegis Chain empowers enterprises with institutional-grade smart contract auditing, vulnerability discovery, and continuous security monitoring. Replace uncertainty with transparent, immutable code and expert research.
             </p>
 
             <div class="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
-                href="https://mizan-1.gitbook.io/mizan/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-brand-orange/95"
-               
+                href="#features"
+                class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-dark px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-primary/20 hover:bg-primary"
               >
-                <i data-lucide="file-text" class="h-4 w-4"></i>
-                Read Whitepaper
+                <i data-lucide="file-search" class="h-4 w-4"></i>
+                Request Audit
               </a>
-
               <a
                 href="#features"
-                class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-cream px-5 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
+                class="inline-flex items-center justify-center gap-2 rounded-xl border border-secondary bg-background px-5 py-3 text-sm font-semibold text-primary-dark shadow-sm hover:bg-secondary-light"
               >
-                <i data-lucide="layers" class="h-4 w-4 text-brand-orange"></i>
+                <i data-lucide="lock" class="h-4 w-4 text-primary-dark"></i>
                 Explore Features
               </a>
             </div>
 
             <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
               <div>
-                <div class="text-lg font-bold text-charcoal">99.9%</div>
-                <div class="mt-1 text-xs font-medium text-slate-500">Uptime-ready</div>
+                <div class="text-lg font-bold text-primary-dark">0</div>
+                <div class="mt-1 text-xs font-medium text-secondary-dark">Exploits Found</div>
               </div>
               <div>
-                <div class="text-lg font-bold text-charcoal">SOC2</div>
-                <div class="mt-1 text-xs font-medium text-slate-500">Security-first</div>
+                <div class="text-lg font-bold text-primary-dark">$500M+</div>
+                <div class="mt-1 text-xs font-medium text-secondary-dark">Secured</div>
               </div>
               <div>
-                <div class="text-lg font-bold text-charcoal">Fast</div>
-                <div class="mt-1 text-xs font-medium text-slate-500">Time to value</div>
+                <div class="text-lg font-bold text-primary-dark">24/7</div>
+                <div class="mt-1 text-xs font-medium text-secondary-dark">Continuous Monitoring</div>
               </div>
             </div>
           </div>
@@ -316,39 +318,38 @@ if (window.firebase && (!firebase.apps || !firebase.apps.length)) {
           </div>
         </section>
 
-        <section id="features" class="mx-auto max-w-6xl pb-16 islamic-pattern rounded-3xl">
+        <section id="features" class="mx-auto max-w-6xl pb-16 rounded-3xl bg-background">
           <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <h2 class="text-2xl font-bold text-charcoal">Ethical, transparent, and audit-ready</h2>
-              <p class="mt-2 max-w-2xl text-sm leading-relaxed text-slate-500">
-                Designed for Sharia-Compliant Transactions with an Interest-Free (Riba-Free) Ledger, Sukuk tokenization,
-                and real-time Sharia auditing with On-chain AAOIFI Standards Compliance.
+              <h2 class="text-2xl font-bold text-primary-dark">Transparent, Secure, and Audit-Ready</h2>
+              <p class="mt-2 max-w-2xl text-sm leading-relaxed text-secondary-dark">
+                Built for Smart Contract Security: Automated vulnerability discovery, real-time monitoring, and expert research for enterprise-grade protection.
               </p>
             </div>
             <a
               id="platform"
               href="./platform.html"
-              class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-cream px-4 py-2 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-50"
+              class="inline-flex items-center gap-2 rounded-xl border border-secondary bg-background px-4 py-2 text-sm font-semibold text-primary-dark shadow-sm hover:bg-secondary-light"
             >
-              <i data-lucide="sparkles" class="h-4 w-4 text-brand-orange"></i>
+              <i data-lucide="code" class="h-4 w-4 text-primary-dark"></i>
               View Platform
             </a>
           </div>
 
-          <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
-            <div class="rounded-2xl border border-slate-200 bg-cream p-6 shadow-sm">
-              <div class="flex items-start gap-4">
-                <div class="grid h-11 w-11 place-items-center rounded-xl bg-brand-orange/10 ring-1 ring-brand-orange/15">
-                  <i data-lucide="hand-coins" class="h-5 w-5 text-brand-orange"></i>
-                </div>
-                <div>
-                  <h3 class="text-base font-semibold text-charcoal">Smart Contracts for Murabaha</h3>
-                  <p class="mt-1 text-sm leading-relaxed text-slate-500">
-                    Blockchain automates asset purchase, ownership transfer, and settlement—clear from order to delivery.
-                  </p>
+            <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
+              <div class="rounded-2xl border border-secondary bg-background-glass p-6 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <div class="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 ring-1 ring-primary/15">
+                    <i data-lucide="shield" class="h-5 w-5 text-primary-dark"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-semibold text-primary-dark">Smart Contract Auditing</h3>
+                    <p class="mt-1 text-sm leading-relaxed text-secondary-dark">
+                      In-depth manual and automated analysis to uncover vulnerabilities in your blockchain applications. Our security researchers ensure your smart contracts are secure and robust.
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
 
             <div class="rounded-2xl border border-slate-200 bg-cream p-6 shadow-sm">
               <div class="flex items-start gap-4">
